@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="jv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wirid & Aji - Naskah Pribadi</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#141109">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-0:#141109;
+    --bg-1:#1c1810;
+    --line:#3c331f;
+    --ink:#c8bb8e;
+    --ink-dim:#948667;
+    --ink-bright:#ded0a0;
+    --gold:#a8935e;
+  }
+
+  *{box-sizing:border-box;}
+
+  html,body{
+    margin:0;
+    padding:0;
+    background:var(--bg-0);
+    color:var(--ink);
+  }
+
+  body{
+    font-family:'EB Garamond', serif;
+    line-height:1.75;
+    font-size:19px;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(168,147,94,0.10), transparent 60%),
+      radial-gradient(ellipse 700px 600px at 90% 100%, rgba(168,147,94,0.05), transparent 55%),
+      var(--bg-0);
+    min-height:100vh;
+  }
+
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:0.05;
+    mix-blend-mode:overlay;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.4) 3px),
+      repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0,0,0,0.4) 3px);
+    background-size:3px 3px;
+  }
+
+  .wrap{
+    max-width:720px;
+    margin:0 auto;
+    padding:6rem 1.75rem 7rem;
+    position:relative;
+  }
+
+  header.hero{
+    text-align:center;
+    margin-bottom:4.5rem;
+  }
+
+  .eyebrow{
+    letter-spacing:0.42em;
+    text-transform:uppercase;
+    font-size:0.72rem;
+    color:var(--ink-dim);
+    margin:0 0 1.4rem;
+  }
+
+  .eyebrow::before,
+  .eyebrow::after{
+    content:"—";
+    color:var(--gold);
+    margin:0 0.6em;
+    opacity:0.6;
+  }
+
+  h1{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    letter-spacing:0.07em;
+    text-transform:uppercase;
+    font-size:clamp(2.1rem, 6vw, 3.2rem);
+    color:var(--ink-bright);
+    margin:0;
+    text-shadow:0 0 34px rgba(168,147,94,0.28);
+  }
+
+  .subtitle{
+    margin:1.1rem 0 0;
+    font-style:italic;
+    color:var(--ink-dim);
+    font-size:1rem;
+    letter-spacing:0.02em;
+  }
+
+  .glyph-divider{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:0.9rem;
+    margin:2.6rem auto 0;
+    width:min(340px, 70%);
+  }
+  .glyph-divider .rule{
+    flex:1;
+    height:1px;
+    background:linear-gradient(90deg, transparent, var(--line) 40%, var(--line) 60%, transparent);
+  }
+  .glyph-divider .mark{
+    width:7px;height:7px;
+    border:1px solid var(--gold);
+    transform:rotate(45deg);
+    opacity:0.75;
+  }
+
+  section.kategori{
+    margin-bottom:3.4rem;
+  }
+
+  .kategori-head{
+    display:flex;
+    align-items:baseline;
+    gap:0.85rem;
+    border-bottom:1px solid var(--line);
+    padding-bottom:0.6rem;
+    margin-bottom:1.2rem;
+  }
+
+  .kategori-label{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    font-size:1.4rem;
+    color:var(--ink-bright);
+    letter-spacing:0.04em;
+  }
+
+  .naskah-list{
+    list-style:none;
+    margin:0;
+    padding:0;
+  }
+
+  .naskah-list li{
+    margin-bottom:0.6rem;
+  }
+
+  .naskah-link{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:1rem;
+    padding:1rem 1.1rem;
+    border:1px solid var(--line);
+    color:var(--ink);
+    text-decoration:none;
+    transition:all 0.2s ease;
+  }
+
+  .naskah-link:hover{
+    border-color:var(--gold);
+    background:rgba(168,147,94,0.06);
+  }
+
+  .naskah-link .judul{
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.15rem;
+    letter-spacing:0.02em;
+    color:var(--ink-bright);
+  }
+
+  .naskah-link .keterangan{
+    font-style:italic;
+    font-size:0.85rem;
+    color:var(--ink-dim);
+  }
+
+  .naskah-link .arrow{
+    color:var(--gold);
+    flex-shrink:0;
+  }
+
+  footer{
+    text-align:center;
+    margin-top:5rem;
+    color:var(--ink-dim);
+    font-style:italic;
+    font-size:0.85rem;
+    letter-spacing:0.03em;
+    opacity:0.7;
+  }
+
+  .install-note{
+    margin-top:3rem;
+    padding:1rem 1.2rem;
+    border:1px dashed var(--line);
+    font-size:0.85rem;
+    color:var(--ink-dim);
+    text-align:center;
+    font-style:italic;
+  }
+
+  @media (max-width:520px){
+    .wrap{ padding:4rem 1.25rem 5rem; }
+    body{ font-size:17.5px; }
+    .naskah-link{ flex-direction:column; align-items:flex-start; gap:0.3rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ scroll-behavior:auto !important; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow">Naskah &middot; Transkrip</p>
+      <h1>Wirid &amp; Aji</h1>
+      <p class="subtitle">Kumpulan wirid dan aji, ditranskrip dari naskah asli</p>
+      <div class="glyph-divider"><span class="rule"></span><span class="mark"></span><span class="rule"></span></div>
+    </header>
+
+    <section class="kategori">
+      <div class="kategori-head">
+        <span class="kategori-label">Malaikatan</span>
+      </div>
+      <ul class="naskah-list">
+        <li>
+          <a class="naskah-link" href="malaikatan-1-2.html">
+            <span>
+              <span class="judul">Malaikatan 1 dan 2</span><br>
+              <span class="keterangan">Sele Tangi Pumo Ono Gawe</span>
+            </span>
+            <span class="arrow">&rarr;</span>
+          </a>
+        </li>
+        <li>
+          <a class="naskah-link" href="malaikatan-3.html">
+            <span>
+              <span class="judul">Malaikatan 3</span><br>
+              <span class="keterangan">Syahadat</span>
+            </span>
+            <span class="arrow">&rarr;</span>
+          </a>
+        </li>
+        <li>
+          <a class="naskah-link" href="malaikatan-4.html">
+            <span>
+              <span class="judul">Malaikatan 4</span><br>
+              <span class="keterangan">Syahadat Pangleburan &amp; Syahadat Pengasihan</span>
+            </span>
+            <span class="arrow">&rarr;</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="kategori">
+      <div class="kategori-head">
+        <span class="kategori-label">Aji</span>
+      </div>
+      <ul class="naskah-list">
+        <li>
+          <a class="naskah-link" href="arjuno-lulut.html">
+            <span>
+              <span class="judul">Arjuno Lulut</span>
+            </span>
+            <span class="arrow">&rarr;</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <p class="install-note">Situs ini dapat dipasang ke layar utama dan dibuka tanpa koneksi internet setelah dibuka sekali.</p>
+
+    <footer>Ditranskrip dari naskah asli</footer>
+  </div>
+
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("service-worker.js").catch(() => {});
+    });
+  }
+</script>
+</body>
+</html>

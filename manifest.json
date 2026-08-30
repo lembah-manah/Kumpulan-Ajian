@@ -1,0 +1,32 @@
+{
+  "name": "Wirid & Aji - Naskah Pribadi",
+  "short_name": "Wirid & Aji",
+  "description": "Kumpulan transkrip wirid dan aji: Malaikatan 1-4 dan Arjuno Lulut",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#141109",
+  "theme_color": "#141109",
+  "lang": "id",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

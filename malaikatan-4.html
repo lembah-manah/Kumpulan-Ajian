@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="jv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#141109">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Malaikatan 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-0:#141109;
+    --bg-1:#1c1810;
+    --line:#3c331f;
+    --ink:#c8bb8e;
+    --ink-dim:#948667;
+    --ink-bright:#ded0a0;
+    --gold:#a8935e;
+  }
+
+  *{box-sizing:border-box;}
+
+  html,body{
+    margin:0;
+    padding:0;
+    background:var(--bg-0);
+    color:var(--ink);
+  }
+
+  body{
+    font-family:'EB Garamond', serif;
+    line-height:1.7;
+    font-size:19px;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(168,147,94,0.10), transparent 60%),
+      radial-gradient(ellipse 700px 600px at 90% 100%, rgba(168,147,94,0.05), transparent 55%),
+      var(--bg-0);
+    min-height:100vh;
+  }
+
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:0.05;
+    mix-blend-mode:overlay;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.4) 3px),
+      repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0,0,0,0.4) 3px);
+    background-size:3px 3px;
+  }
+
+  .wrap{
+    max-width:720px;
+    margin:0 auto;
+    padding:6rem 1.75rem 7rem;
+    position:relative;
+  }
+
+  header.hero{
+    text-align:center;
+    margin-bottom:5rem;
+  }
+
+  .eyebrow{
+    letter-spacing:0.42em;
+    text-transform:uppercase;
+    font-size:0.72rem;
+    color:var(--ink-dim);
+    margin:0 0 1.4rem;
+  }
+
+  .eyebrow::before,
+  .eyebrow::after{
+    content:"—";
+    color:var(--gold);
+    margin:0 0.6em;
+    opacity:0.6;
+  }
+
+  h1{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    letter-spacing:0.09em;
+    text-transform:uppercase;
+    font-size:clamp(2.3rem, 6vw, 3.6rem);
+    color:var(--ink-bright);
+    margin:0;
+    text-shadow:0 0 34px rgba(168,147,94,0.28);
+  }
+
+  .subtitle{
+    margin:1.1rem 0 0;
+    font-style:italic;
+    color:var(--ink-dim);
+    font-size:1.02rem;
+    letter-spacing:0.02em;
+  }
+
+  .glyph-divider{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:0.9rem;
+    margin:2.6rem auto 0;
+    width:min(340px, 70%);
+  }
+  .glyph-divider .rule{
+    flex:1;
+    height:1px;
+    background:linear-gradient(90deg, transparent, var(--line) 40%, var(--line) 60%, transparent);
+  }
+  .glyph-divider .mark{
+    width:7px;height:7px;
+    border:1px solid var(--gold);
+    transform:rotate(45deg);
+    opacity:0.75;
+  }
+
+  section.tingkat{
+    margin-bottom:4rem;
+  }
+
+  .tingkat-head{
+    display:flex;
+    align-items:baseline;
+    gap:0.85rem;
+    border-bottom:1px solid var(--line);
+    padding-bottom:0.6rem;
+    margin-bottom:1.4rem;
+  }
+
+  .tingkat-label{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    font-size:1.5rem;
+    color:var(--ink-bright);
+    letter-spacing:0.04em;
+    white-space:nowrap;
+  }
+
+  .lafal-list{
+    margin:0;
+    padding:0;
+    list-style:none;
+  }
+
+  .lafal-list li{
+    margin:0 0 0.75rem;
+    color:var(--ink);
+    letter-spacing:0.012em;
+  }
+
+  .lafal-list li:last-child{ margin-bottom:0; }
+
+  footer{
+    text-align:center;
+    margin-top:5rem;
+    color:var(--ink-dim);
+    font-style:italic;
+    font-size:0.85rem;
+    letter-spacing:0.03em;
+    opacity:0.7;
+  }
+
+  @media (max-width:520px){
+    .wrap{ padding:4rem 1.25rem 5rem; }
+    body{ font-size:17.5px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ scroll-behavior:auto !important; }
+  }
+
+  .site-nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    max-width:720px;
+    margin:0 auto;
+    padding:1.1rem 1.75rem;
+    font-family:'EB Garamond', serif;
+    font-size:0.82rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    border-bottom:1px solid var(--line);
+    position:sticky;
+    top:0;
+    background:var(--bg-0);
+    z-index:10;
+  }
+  .site-nav a{
+    color:var(--ink-dim);
+    text-decoration:none;
+    transition:color 0.2s ease;
+  }
+  .site-nav a:hover{ color:var(--ink-bright); }
+  .site-nav .home-link{ color:var(--gold); }
+  .page-footer-nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:1rem;
+    max-width:720px;
+    margin:3.5rem auto 0;
+    padding-top:1.6rem;
+    border-top:1px solid var(--line);
+    font-size:0.82rem;
+    letter-spacing:0.04em;
+  }
+  .page-footer-nav a{
+    color:var(--ink-dim);
+    text-decoration:none;
+    border:1px solid var(--line);
+    padding:0.55rem 1rem;
+    transition:all 0.2s ease;
+    white-space:nowrap;
+  }
+  .page-footer-nav a:hover{
+    color:var(--ink-bright);
+    border-color:var(--gold);
+  }
+  .page-footer-nav .spacer{ flex:1; }
+  .page-footer-nav .nav-next{ margin-left:auto; }
+  @media (max-width:520px){
+    .site-nav{ padding:0.9rem 1.25rem; font-size:0.72rem; }
+    .page-footer-nav{ flex-wrap:wrap; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+  <nav class="site-nav">
+    <a href="index.html" class="home-link">&larr; Beranda</a>
+    <span></span>
+  </nav>
+
+    <header class="hero">
+      <p class="eyebrow">Wirid &middot; Tingkatan</p>
+      <h1>Malaikatan 4</h1>
+      <p class="subtitle">Syahadat Pangleburan &amp; Syahadat Pengasihan</p>
+      <div class="glyph-divider"><span class="rule"></span><span class="mark"></span><span class="rule"></span></div>
+    </header>
+
+    <section class="tingkat">
+      <div class="tingkat-head">
+        <span class="tingkat-label">Syahadat Pangleburan</span>
+      </div>
+      <ul class="lafal-list">
+        <li>Bismilahirrohmanirrohim</li>
+        <li>Syahadat</li>
+        <li>Sahadat iladat, sahadat ilatku, sahadat pangleburan</li>
+        <li>Sing malang tak saruk, putung</li>
+        <li>Sing kependem tak idaki, kungkal</li>
+        <li>Si amat linggih telkim Muhammad nglinggehi telkim</li>
+        <li>He jabang bayine (:musuhku), (:musuhku) mayit</li>
+        <li>Aku malaikat</li>
+        <li>Qullu nafsin dzaikhotul maut</li>
+        <li>Jakok mukuk wulu lemes (jakuk mukuk wulu kasar)</li>
+        <li>He (:musuhku) disik endi nesumu karo ususmu?</li>
+        <li>Disik ususmu</li>
+        <li>He (:musuhku) lemes lempruk kemlumpruk nesumu koyo ususmu</li>
+        <li>La ilaha illalloh muhammadar rasullulloh</li>
+      </ul>
+    </section>
+
+    <section class="tingkat">
+      <div class="tingkat-head">
+        <span class="tingkat-label">Syahadat Pengasihan</span>
+      </div>
+      <ul class="lafal-list">
+        <li>Bismilahirrohmanirrohim</li>
+        <li>Syahadat</li>
+        <li>Sahadat iladat, sahadad ilatku, sahadad pangleburan</li>
+        <li>Sing malang tak saruk putung</li>
+        <li>Sing kependem taidaki kungkal</li>
+        <li>Si amat linggih telkin</li>
+        <li>Muhammad ngelinggehi telkin</li>
+        <li>He jabang bayine si (:nama sasaran), (:nama sasaran) welas asih marang aku</li>
+        <li>Aku malaikat</li>
+        <li>Solallohu alaihi wassalam</li>
+        <li>Sebet pengiringku</li>
+        <li>Lengkuono ing badanku</li>
+        <li>Sakti guno pangucapku</li>
+        <li>Yo aku wong lanang sejati tan ono sing madani</li>
+        <li>Sido welas sido asih jabang bayine si (:nama sasaran) asih-o marang aku.</li>
+        <li>Asih saking kersane Alloh</li>
+        <li>La ilaha illalloh muhammadar rasullulloh</li>
+      </ul>
+    </section>
+
+    <footer>Ditranskrip dari naskah asli</footer>
+  <nav class="page-footer-nav">
+    <a href="malaikatan-3.html">&larr; Malaikatan 3</a>
+    <a href="index.html">Beranda</a>
+    <a href="arjuno-lulut.html" class="nav-next">Arjuno Lulut &rarr;</a>
+  </nav>
+  </div>
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("service-worker.js").catch(() => {});
+    });
+  }
+</script>
+</body>
+</html>
