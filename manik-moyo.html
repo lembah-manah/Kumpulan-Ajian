@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="jv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#141109">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Manik Moyo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-0:#141109;
+    --bg-1:#1c1810;
+    --line:#3c331f;
+    --ink:#c8bb8e;
+    --ink-dim:#948667;
+    --ink-bright:#ded0a0;
+    --gold:#a8935e;
+  }
+
+  *{box-sizing:border-box;}
+
+  html,body{
+    margin:0;
+    padding:0;
+    background:var(--bg-0);
+    color:var(--ink);
+  }
+
+  body{
+    font-family:'EB Garamond', serif;
+    line-height:1.75;
+    font-size:19px;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(168,147,94,0.10), transparent 60%),
+      radial-gradient(ellipse 700px 600px at 90% 100%, rgba(168,147,94,0.05), transparent 55%),
+      var(--bg-0);
+    min-height:100vh;
+  }
+
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:0.05;
+    mix-blend-mode:overlay;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.4) 3px),
+      repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0,0,0,0.4) 3px);
+    background-size:3px 3px;
+  }
+
+  .wrap{
+    max-width:720px;
+    margin:0 auto;
+    padding:6rem 1.75rem 7rem;
+    position:relative;
+  }
+
+  header.hero{
+    text-align:center;
+    margin-bottom:5rem;
+  }
+
+  .eyebrow{
+    letter-spacing:0.42em;
+    text-transform:uppercase;
+    font-size:0.72rem;
+    color:var(--ink-dim);
+    margin:0 0 1.4rem;
+  }
+
+  .eyebrow::before,
+  .eyebrow::after{
+    content:"—";
+    color:var(--gold);
+    margin:0 0.6em;
+    opacity:0.6;
+  }
+
+  h1{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    letter-spacing:0.07em;
+    text-transform:uppercase;
+    font-size:clamp(2rem, 6vw, 3.1rem);
+    color:var(--ink-bright);
+    margin:0;
+    text-shadow:0 0 34px rgba(168,147,94,0.28);
+  }
+
+  .subtitle{
+    margin:1.1rem 0 0;
+    font-style:italic;
+    color:var(--ink-dim);
+    font-size:1rem;
+    letter-spacing:0.02em;
+  }
+
+  .glyph-divider{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:0.9rem;
+    margin:2.6rem auto 0;
+    width:min(340px, 70%);
+  }
+  .glyph-divider .rule{
+    flex:1;
+    height:1px;
+    background:linear-gradient(90deg, transparent, var(--line) 40%, var(--line) 60%, transparent);
+  }
+  .glyph-divider .mark{
+    width:7px;height:7px;
+    border:1px solid var(--gold);
+    transform:rotate(45deg);
+    opacity:0.75;
+  }
+
+  section.tingkat{
+    margin-bottom:4rem;
+  }
+
+  .tingkat-head{
+    display:flex;
+    align-items:baseline;
+    gap:0.85rem;
+    border-bottom:1px solid var(--line);
+    padding-bottom:0.6rem;
+    margin-bottom:1.4rem;
+  }
+
+  .tingkat-label{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    font-size:1.5rem;
+    color:var(--ink-bright);
+    letter-spacing:0.04em;
+  }
+
+  .tingkat-title{
+    font-style:italic;
+    color:var(--ink-dim);
+    font-size:1rem;
+    letter-spacing:0.02em;
+  }
+
+  p.lafal{
+    margin:0 0 1.3rem;
+    color:var(--ink);
+    letter-spacing:0.012em;
+    text-align:justify;
+  }
+  p.lafal:last-child{ margin-bottom:0; }
+
+  .definisi{
+    margin:0 0 1.3rem;
+  }
+  .definisi .term{
+    color:var(--ink-bright);
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    letter-spacing:0.03em;
+  }
+
+  ol.ciri-list{
+    margin:0 0 1.3rem;
+    padding-left:1.4rem;
+  }
+  ol.ciri-list li{
+    margin-bottom:0.5rem;
+    color:var(--ink);
+  }
+
+  /* Attribute cards (Dzat/Sifat/Asma/Af'al) */
+  .atribut-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1.3rem;
+    margin-bottom:1.6rem;
+  }
+  .atribut-card{
+    border:1px solid var(--line);
+    padding:1.1rem 1.2rem;
+  }
+  .atribut-card .a-title{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    font-size:1.2rem;
+    color:var(--ink-bright);
+    letter-spacing:0.05em;
+    margin:0 0 0.7rem;
+    padding-bottom:0.5rem;
+    border-bottom:1px dashed var(--line);
+  }
+  .atribut-card dl{
+    margin:0;
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:0.35rem 0.6rem;
+    font-size:0.86rem;
+  }
+  .atribut-card dt{
+    color:var(--ink-dim);
+    font-style:italic;
+  }
+  .atribut-card dd{
+    margin:0;
+    color:var(--ink);
+  }
+
+  /* Highlight box */
+  .highlight-box{
+    margin:0 0 1.3rem;
+    padding:1.3rem 1.4rem;
+    border:1px solid var(--gold);
+    background:rgba(168,147,94,0.08);
+    text-align:center;
+  }
+  .highlight-box p{
+    margin:0 0 0.8rem;
+    color:var(--ink-bright);
+    font-size:0.95rem;
+    letter-spacing:0.015em;
+    line-height:1.65;
+  }
+  .highlight-box p:last-child{ margin-bottom:0; font-style:italic; color:var(--gold); }
+
+  /* Dhohir / Bathin comparison */
+  .banding-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1.3rem;
+  }
+  .banding-card{
+    border:1px solid var(--line);
+    padding:1.2rem 1.2rem;
+  }
+  .banding-card .b-title{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    font-size:1.25rem;
+    color:var(--gold);
+    letter-spacing:0.06em;
+    text-align:center;
+    margin:0 0 0.9rem;
+    padding-bottom:0.6rem;
+    border-bottom:1px solid var(--line);
+  }
+  .banding-card ul{
+    margin:0;
+    padding-left:1.1rem;
+    font-size:0.86rem;
+  }
+  .banding-card li{
+    margin-bottom:0.6rem;
+    color:var(--ink);
+    line-height:1.55;
+  }
+  .banding-card li:last-child{ margin-bottom:0; }
+
+  footer{
+    text-align:center;
+    margin-top:5rem;
+    color:var(--ink-dim);
+    font-style:italic;
+    font-size:0.85rem;
+    letter-spacing:0.03em;
+    opacity:0.7;
+  }
+
+  @media (max-width:520px){
+    .wrap{ padding:4rem 1.25rem 5rem; }
+    body{ font-size:17.5px; }
+    .atribut-grid{ grid-template-columns:1fr; }
+    .banding-grid{ grid-template-columns:1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ scroll-behavior:auto !important; }
+  }
+
+  .site-nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    max-width:720px;
+    margin:0 auto;
+    padding:1.1rem 1.75rem;
+    font-family:'EB Garamond', serif;
+    font-size:0.82rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    border-bottom:1px solid var(--line);
+    position:sticky;
+    top:0;
+    background:var(--bg-0);
+    z-index:10;
+  }
+  .site-nav a{
+    color:var(--ink-dim);
+    text-decoration:none;
+    transition:color 0.2s ease;
+  }
+  .site-nav a:hover{ color:var(--ink-bright); }
+  .site-nav .home-link{ color:var(--gold); }
+  .page-footer-nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:1rem;
+    max-width:720px;
+    margin:3.5rem auto 0;
+    padding-top:1.6rem;
+    border-top:1px solid var(--line);
+    font-size:0.82rem;
+    letter-spacing:0.04em;
+  }
+  .page-footer-nav a{
+    color:var(--ink-dim);
+    text-decoration:none;
+    border:1px solid var(--line);
+    padding:0.55rem 1rem;
+    transition:all 0.2s ease;
+    white-space:nowrap;
+  }
+  .page-footer-nav a:hover{
+    color:var(--ink-bright);
+    border-color:var(--gold);
+  }
+  .page-footer-nav .nav-next{ margin-left:auto; }
+  @media (max-width:520px){
+    .site-nav{ padding:0.9rem 1.25rem; font-size:0.72rem; }
+    .page-footer-nav{ flex-wrap:wrap; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+  <nav class="site-nav">
+    <a href="index.html" class="home-link">&larr; Beranda</a>
+    <span></span>
+  </nav>
+
+    <header class="hero">
+      <p class="eyebrow">Ngelmu &middot; Diagram</p>
+      <h1>Manik Moyo</h1>
+      <p class="subtitle">Jauhar Awal / Jauhar Manik</p>
+      <div class="glyph-divider"><span class="rule"></span><span class="mark"></span><span class="rule"></span></div>
+    </header>
+
+    <section class="tingkat">
+      <div class="tingkat-head">
+        <span class="tingkat-label">Pengertian</span>
+      </div>
+      <p class="definisi"><span class="term">Manik</span> : permata, intisari</p>
+      <p class="definisi"><span class="term">Moyo</span> : kilauan, cahaya, ilusi kesadaran</p>
+    </section>
+
+    <section class="tingkat">
+      <div class="tingkat-head">
+        <span class="tingkat-label">Sukmo &ndash; Nafsu</span>
+        <span class="tingkat-title">Sedulur 4 &ndash; Kiblat 4</span>
+      </div>
+      <p class="lafal">Bahwa sukmo terikat oleh panca indera (jalannya nafsu/sukmo adalah panca indera).</p>
+
+      <div class="atribut-grid">
+        <div class="atribut-card">
+          <p class="a-title">Dzat</p>
+          <dl>
+            <dt>Nafsu</dt><dd>Mutmainah</dd>
+            <dt>Kiblat</dt><dd>Wetan</dd>
+            <dt>Warna</dt><dd>Putih</dd>
+            <dt>Unsur</dt><dd>Air</dd>
+            <dt>Pasaran</dt><dd>Pahing</dd>
+            <dt>Napas</dt><dd>Nafas</dd>
+            <dt>Rasa</dt><dd>Sejo</dd>
+            <dt>Indera</dt><dd>Hidung</dd>
+          </dl>
+        </div>
+        <div class="atribut-card">
+          <p class="a-title">Sifat</p>
+          <dl>
+            <dt>Nafsu</dt><dd>Amarah</dd>
+            <dt>Kiblat</dt><dd>Kidul</dd>
+            <dt>Warna</dt><dd>Abang</dd>
+            <dt>Unsur</dt><dd>Api</dd>
+            <dt>Pasaran</dt><dd>Pon</dd>
+            <dt>Napas</dt><dd>Tanafas</dd>
+            <dt>Rasa</dt><dd>Krentek</dd>
+            <dt>Indera</dt><dd>Telinga</dd>
+          </dl>
+        </div>
+        <div class="atribut-card">
+          <p class="a-title">Asma</p>
+          <dl>
+            <dt>Nafsu</dt><dd>Sufiyah</dd>
+            <dt>Kiblat</dt><dd>Kulon</dd>
+            <dt>Warna</dt><dd>Kuning</dd>
+            <dt>Unsur</dt><dd>Angin</dd>
+            <dt>Pasaran</dt><dd>Legi</dd>
+            <dt>Napas</dt><dd>Anpas</dd>
+            <dt>Rasa</dt><dd>Intuisi</dd>
+            <dt>Indera</dt><dd>Mata</dd>
+          </dl>
+        </div>
+        <div class="atribut-card">
+          <p class="a-title">Af'al</p>
+          <dl>
+            <dt>Nafsu</dt><dd>Aluwamah</dd>
+            <dt>Kiblat</dt><dd>Lor</dd>
+            <dt>Warna</dt><dd>Hitam</dd>
+            <dt>Unsur</dt><dd>Tanah</dd>
+            <dt>Pasaran</dt><dd>Wage</dd>
+            <dt>Napas</dt><dd>Nupus</dd>
+            <dt>Rasa</dt><dd>Karep</dd>
+            <dt>Indera</dt><dd>Mulut</dd>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section class="tingkat">
+      <div class="tingkat-head">
+        <span class="tingkat-label">Ciri Jiwa Keruh</span>
+      </div>
+      <p class="lafal">Menjadi tanda manusia dalam gerak hidup yang masih karena nafsu, dengan mempunyai ciri:</p>
+      <ol class="ciri-list">
+        <li>Karena dendam masa lalu</li>
+        <li>Kecewa</li>
+        <li>Kekhawatiran</li>
+      </ol>
+      <p class="lafal">Yang dari tiga hal tersebut menjadikan sebuah harapan/keinginan/cita-cita. Keadaan seperti ini tidak bisa dikatakan lillah.</p>
+      <p class="lafal">Hal yang demikian dikatakan jiwanya masih keruh, dikarenakan dia hidup atas dasar proyektor yang ditampilkan oleh akal berdasarkan apa yang terekam oleh nafsu melalui panca indera.</p>
+    </section>
+
+    <section class="tingkat">
+      <div class="tingkat-head">
+        <span class="tingkat-label">Menuju Lillah</span>
+      </div>
+      <p class="lafal">Syarat lillah adalah karena Allah / memandang Allah/Rasulullah.</p>
+      <p class="lafal">Titik awal seseorang mampu lillah ketika dia sampai kepada iman maqbul, atau seseorang bisa ridho atas takdir/ketetapan dari Allah.</p>
+      <p class="lafal">Dan tidak pernah mungkin seseorang mampu ridho atas takdir Allah kecuali seseorang tersebut pandangannya mampu menembus bahwa dibalik semua yang terjadi adalah atas kehendak Allah sendiri.</p>
+    </section>
+
+    <section class="tingkat">
+      <div class="tingkat-head">
+        <span class="tingkat-label">Iman Kalim wa Mukalim</span>
+      </div>
+      <p class="lafal">Dimana seseorang sudah mulai menyadari tentang peran.</p>
+      <p class="lafal">Seorang yang kalim mukalim sudah menyadari kalam/perintah Allah melalui keadaan/kejadian/suasana dan rasa yang diberikan Allah kepadanya.</p>
+      <p class="lafal">Orang kalim wa mukalim cenderung suwung/fana. Dia tidak mencari apa-apa, namun dia melakukan apa-apa. Dia tidak ingin apa-apa, namun dia menghendaki apa-apa.</p>
+      <p class="lafal">Tidak ada yang dicari karena dirinya sadar bahwa dirinya dihadirkan di dunia hanya menjadi tajalli Allah, dalam arti sederhana "berperan" seperti apa yang menjadi kehendak Allah.</p>
+      <p class="lafal" style="text-align:center; font-style:italic; color:var(--ink-bright);">Ngopo &ndash; Opo &ndash; Sopo</p>
+    </section>
+
+    <section class="tingkat">
+      <div class="tingkat-head">
+        <span class="tingkat-label">Kesadaran</span>
+        <span class="tingkat-title">Jiwa Jernih</span>
+      </div>
+      <p class="lafal">"Kesadaran" peran ini yang disebut manik moyo, atau awal/inti dari segala gerak, dan yang seharusnya menggerakkan nafsu untuk obah polah sebagaimana yang diperintahkan Allah melalui rasa yang diberikan di hatinya, keadaan/kondisi, dan kejadian yang terjadi.</p>
+      <p class="lafal">Manusia yang seperti ini disebut dengan jiwa jernih.</p>
+      <p class="lafal" style="text-align:center; font-style:italic;">Ono roso sak njerone obah, ono obah sak njerone polah. Ingsun polahe Allah.</p>
+    </section>
+
+    <section class="tingkat">
+      <div class="highlight-box">
+        <p>Siapapun yang mengerti akan hal ini, dia akan mengerti tentang makna yang tersembunyi dari Bismillah, karena inilah hakekat makna yang tersembunyi dari Bismillah.</p>
+        <p>Ada makna tersurat, tersirat, dan tersembunyi.</p>
+      </div>
+    </section>
+
+    <section class="tingkat">
+      <div class="tingkat-head">
+        <span class="tingkat-label">Dhohir &amp; Bathin</span>
+      </div>
+      <div class="banding-grid">
+        <div class="banding-card">
+          <p class="b-title">Dhohir</p>
+          <ul>
+            <li>Disebut Muhammad</li>
+            <li>Gerak, nafsu/sukmo adalah bagiannya</li>
+            <li>Nafsu terikat dengan panca indera, nafsu lekat dengan akal</li>
+            <li>Sehingga Muhammad/dhohir kalau tidak kenal/sadar akan Allah, akan hidup berdasar nafsu saja</li>
+          </ul>
+        </div>
+        <div class="banding-card">
+          <p class="b-title">Bathin</p>
+          <ul>
+            <li>Disebut Allah</li>
+            <li>Kesadaran/manik moyo, jiwa adalah bagiannya</li>
+            <li>Jiwa terikat pada kesadaran</li>
+            <li>Sehingga Allah/bathin harus dikenali, sehingga setiap gerak hidup manusia/Muhammad/dhohir dilakukan dengan sadar atas perintah Allah</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer>Ditranskrip dari naskah asli</footer>
+  <nav class="page-footer-nav">
+    <a href="dhohir-manusia.html">&larr; Dhohir Manusia</a>
+    <a href="index.html">Beranda</a>
+  </nav>
+  </div>
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("service-worker.js").catch(() => {});
+    });
+  }
+</script>
+</body>
+</html>

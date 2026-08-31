@@ -1,4 +1,4 @@
-const CACHE_NAME = "wirid-aji-cache-v2";
+const CACHE_NAME = "wirid-aji-cache-v4";
 
 // Semua file yang perlu disimpan supaya bisa dibuka offline.
 // Kalau nanti nambah halaman baru, tambahkan juga di sini.
@@ -10,6 +10,8 @@ const FILES_TO_CACHE = [
   "./malaikatan-4.html",
   "./arjuno-lulut.html",
   "./hijib-barqi.html",
+  "./dhohir-manusia.html",
+  "./manik-moyo.html",
   "./manifest.json",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
