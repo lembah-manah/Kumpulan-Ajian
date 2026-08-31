@@ -8,10 +8,10 @@
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Arjuno Lulut</title>
+<title>Hijib Barqi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg-0:#141109;
@@ -57,7 +57,7 @@
   }
 
   .wrap{
-    max-width:680px;
+    max-width:720px;
     margin:0 auto;
     padding:6rem 1.75rem 7rem;
     position:relative;
@@ -65,7 +65,7 @@
 
   header.hero{
     text-align:center;
-    margin-bottom:4rem;
+    margin-bottom:5rem;
   }
 
   .eyebrow{
@@ -95,6 +95,15 @@
     text-shadow:0 0 34px rgba(168,147,94,0.28);
   }
 
+  .subtitle{
+    margin:1.1rem 0 0;
+    font-family:'Amiri', serif;
+    color:var(--ink-dim);
+    font-size:1.6rem;
+    letter-spacing:0.02em;
+    direction:rtl;
+  }
+
   .glyph-divider{
     display:flex;
     align-items:center;
@@ -115,33 +124,56 @@
     opacity:0.75;
   }
 
-  .lafal-list{
-    margin:0;
-    padding:0;
-    list-style:none;
+  section.tingkat{
+    margin-bottom:4rem;
   }
 
-  .lafal-list li{
-    margin:0 0 0.85rem;
+  p.arab{
+    direction:rtl;
+    text-align:right;
+    font-family:'Amiri', serif;
+    font-size:1.65rem;
+    line-height:2.15;
+    color:var(--ink-bright);
+    margin:0 0 2.2rem;
+  }
+
+  .latin-head{
+    display:flex;
+    align-items:center;
+    gap:0.7rem;
+    margin:0 0 1.1rem;
+  }
+
+  .latin-head::before,
+  .latin-head::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--line);
+  }
+
+  .latin-head span{
+    font-style:italic;
+    font-size:0.78rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--ink-dim);
+    white-space:nowrap;
+  }
+
+  p.lafal{
+    margin:0 0 1.3rem;
     color:var(--ink);
     letter-spacing:0.012em;
+    text-align:justify;
   }
 
-  .lafal-list li:last-child{ margin-bottom:0; }
-
-  .catatan{
-    margin-top:3rem;
-    padding-top:1.4rem;
-    border-top:1px solid var(--line);
-    font-style:italic;
-    font-size:0.88rem;
-    color:var(--ink-dim);
-    line-height:1.6;
-  }
+  p.lafal:last-child{ margin-bottom:0; }
 
   footer{
     text-align:center;
-    margin-top:4rem;
+    margin-top:5rem;
     color:var(--ink-dim);
     font-style:italic;
     font-size:0.85rem;
@@ -152,6 +184,8 @@
   @media (max-width:520px){
     .wrap{ padding:4rem 1.25rem 5rem; }
     body{ font-size:17.5px; }
+    p.arab{ font-size:1.4rem; line-height:2; }
+    .subtitle{ font-size:1.3rem; }
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -222,30 +256,29 @@
   </nav>
 
     <header class="hero">
-      <p class="eyebrow">Aji &middot; Wirid</p>
-      <h1>Arjuno Lulut</h1>
+      <p class="eyebrow">Hijib</p>
+      <h1>Hijib Barqi</h1>
+      <p class="subtitle">حِزْبُ الْبَرْقِ</p>
       <div class="glyph-divider"><span class="rule"></span><span class="mark"></span><span class="rule"></span></div>
     </header>
 
-    <ul class="lafal-list">
-      <li>Ajiku Arjuna Lulut Sayidin Nurullah</li>
-      <li>Umurku Sang Hyang Wenang</li>
-      <li>Nyawaku gedhong pertolo mengku Rosulullah</li>
-      <li>Ajiku Arjuno Lulut</li>
-      <li>Payung sekar mayang gadhing Panji Kaenan</li>
-      <li>Netraku Nabi welas</li>
-      <li>Sungkemku telogo kencono</li>
-      <li>Dhadaku wong sak buwono alam</li>
-      <li>Lakuku kembar payoko, yahu Alloh</li>
-      <li>Nduwur sijak Alloh, ngisor sijak Adam</li>
-      <li>Alloh&hellip; Laillaha ilallah Muhammad Rosululloh</li>
-    </ul>
+    <section class="tingkat">
+      <p class="arab">
+        أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُوْلُ اللهِ.
+        بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيْمِ. نَرُدُّ بِكَ الْأَعْدَاءَ مِنْ كُلِّ وِجْهَةٍ.
+        وَبِالِاسْمِ نَرْمِيْهِمْ مِنَ الْبُعْدِ بِالشَّتَاتِ، فَأَنْتَ رَجَائِيْ يَا إِلَهِيْ وَسَيِّدِيْ،
+        فَفَرِّقْ لَهُمُ الْجَيْشَ إِنْ رَمَى بِيْ غَلَطٌ.
+      </p>
+
+      <div class="latin-head"><span>Latin</span></div>
+      <p class="lafal">Asyhadu an laa ilaaha illallaahu wa-asyhadu anna muhammadan rasuulullaah. Bismillahir rahmaanir rahiim. Naruddu bikal a'daa-a min kulli wijhatin. Wabil-ismi narmiihim minal bu'di bisy-syataati fa-anta rajaa-ii yaa ilaahii wasayyidii fafarriq lahumul jaisya in ramaa bii ghalat.</p>
+    </section>
 
     <footer>Ditranskrip dari naskah asli</footer>
   <nav class="page-footer-nav">
-    <a href="malaikatan-4.html">&larr; Malaikatan 4</a>
+    <a href="arjuno-lulut.html">&larr; Arjuno Lulut</a>
     <a href="index.html">Beranda</a>
-    <a href="hijib-barqi.html" class="nav-next">Hijib Barqi &rarr;</a>
+    <span></span>
   </nav>
   </div>
 <script>
