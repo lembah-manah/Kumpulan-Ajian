@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0f7a4f">
+<title>Doa Ukasyah RA — Arab, Latin, dan Terjemahan</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Segoe+UI&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0f1a1a;
+    --card:#152524;
+    --card-border:#25423f;
+    --gold:#c9a24b;
+    --gold-soft:#e9d9a8;
+    --text:#eef2ef;
+    --muted:#9fb3ae;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: radial-gradient(circle at top, #1b302d 0%, #0f1a1a 60%);
+    color:var(--text);
+    padding-bottom:60px;
+  }
+  header{
+    text-align:center;
+    padding:40px 20px 25px;
+    border-bottom:1px solid var(--card-border);
+  }
+  header h1{
+    margin:0;
+    font-size:1.8rem;
+    color:var(--gold-soft);
+    letter-spacing:0.5px;
+  }
+  header p{
+    margin:8px 0 0;
+    color:var(--muted);
+    font-size:0.95rem;
+  }
+  .container{
+    max-width:820px;
+    margin:0 auto;
+    padding:20px 16px;
+  }
+  .back-home{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    color:var(--gold-soft);
+    text-decoration:none;
+    font-size:0.85rem;
+    padding:8px 14px;
+    border:1px solid var(--card-border);
+    border-radius:20px;
+    transition:0.2s;
+  }
+  .back-home:hover{
+    border-color:var(--gold);
+    background:rgba(201,162,75,0.08);
+  }
+  .back-home-wrap{
+    display:flex;
+    justify-content:center;
+    padding:14px 16px 0;
+  }
+  .intro{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:14px;
+    padding:18px 20px;
+    margin-bottom:26px;
+    font-size:0.93rem;
+    line-height:1.6;
+    color:var(--muted);
+  }
+  .intro b{color:var(--gold-soft);}
+  .page-indicator{
+    text-align:center;
+    color:var(--muted);
+    font-size:0.8rem;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    margin-bottom:14px;
+  }
+  .page-indicator b{color:var(--gold-soft);}
+  .segment{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:16px;
+    padding:26px 22px 18px;
+    margin-bottom:20px;
+    box-shadow:0 4px 14px rgba(0,0,0,0.25);
+    min-height:260px;
+  }
+  .segment .no{
+    font-size:0.72rem;
+    color:var(--gold);
+    letter-spacing:1px;
+    text-transform:uppercase;
+    margin-bottom:10px;
+  }
+  .nav-bar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-top:8px;
+  }
+  .nav-btn{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    background:transparent;
+    border:1px solid var(--gold);
+    color:var(--gold-soft);
+    padding:10px 16px;
+    border-radius:10px;
+    font-size:0.85rem;
+    cursor:pointer;
+    transition:0.2s;
+  }
+  .nav-btn:hover:not(:disabled){
+    background:var(--gold);
+    color:#1a1a1a;
+  }
+  .nav-btn:disabled{
+    opacity:0.35;
+    cursor:not-allowed;
+  }
+  .jump-wrap{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    color:var(--muted);
+    font-size:0.8rem;
+  }
+  .jump-wrap select{
+    background:var(--card);
+    color:var(--text);
+    border:1px solid var(--card-border);
+    border-radius:8px;
+    padding:6px 8px;
+    font-size:0.8rem;
+  }
+  .dots{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    justify-content:center;
+    margin:18px 0 4px;
+  }
+  .dots span{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:var(--card-border);
+    cursor:pointer;
+    transition:0.2s;
+  }
+  .dots span.active{
+    background:var(--gold);
+    width:22px;
+    border-radius:5px;
+  }
+  .arabic{
+    font-family:'Amiri', serif;
+    font-size:1.9rem;
+    line-height:2.6;
+    direction:rtl;
+    text-align:right;
+    color:var(--gold-soft);
+    margin:0 0 14px;
+  }
+  .toggle-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:none;
+    border:1px solid var(--card-border);
+    color:var(--muted);
+    padding:7px 14px;
+    border-radius:20px;
+    font-size:0.8rem;
+    cursor:pointer;
+    transition:0.2s;
+  }
+  .toggle-btn:hover{
+    border-color:var(--gold);
+    color:var(--gold-soft);
+  }
+  .toggle-btn .arrow{
+    transition:transform 0.25s;
+    display:inline-block;
+  }
+  .toggle-btn.open .arrow{
+    transform:rotate(180deg);
+  }
+  .details{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height 0.35s ease;
+  }
+  .details.open{
+    max-height:900px;
+  }
+  .details-inner{
+    padding-top:16px;
+    border-top:1px dashed var(--card-border);
+    margin-top:14px;
+  }
+  .latin{
+    font-style:italic;
+    color:#cfe3df;
+    font-size:0.95rem;
+    line-height:1.65;
+    margin:0 0 12px;
+  }
+  .latin .label, .terjemahan .label{
+    display:block;
+    font-style:normal;
+    font-size:0.7rem;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:4px;
+  }
+  .terjemahan{
+    color:var(--muted);
+    font-size:0.92rem;
+    line-height:1.65;
+    margin:0;
+  }
+  footer{
+    text-align:center;
+    color:var(--muted);
+    font-size:0.8rem;
+    margin-top:30px;
+    padding:0 20px;
+    line-height:1.6;
+  }
+  footer a{color:var(--gold-soft);}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>✨ Doa Ukasyah RA ✨</h1>
+  <p>Arab, Latin, dan Terjemahan</p>
+</header>
+
+<div class="back-home-wrap">
+  <a class="back-home" href="index.html">&larr; Kembali ke Beranda</a>
+</div>
+
+<div class="container">
+
+  <div class="intro">
+   <center> Doa ini dinisbatkan kepada sahabat Nabi, <b>Ukasyah bin Mihshan Al-Asadi RA.</center> </b>
+  </div>
+
+  <div class="page-indicator">Bacaan <b id="pageNum">1</b> dari <b id="pageTotal">1</b></div>
+
+  <div id="segments"></div>
+
+  <div class="nav-bar">
+    <button class="nav-btn" id="prevBtn" onclick="goPage(currentPage-1)">‹ Sebelumnya</button>
+    <div class="jump-wrap">
+      Ke bacaan
+      <select id="jumpSelect" onchange="goPage(parseInt(this.value))"></select>
+    </div>
+    <button class="nav-btn" id="nextBtn" onclick="goPage(currentPage+1)">Berikutnya ›</button>
+  </div>
+
+  <div class="dots" id="dots"></div>
+
+  <footer>
+    Sentuh tombol "Latin &amp; Terjemahan" untuk menampilkan atau menyembunyikannya.
+  </footer>
+</div>
+
+<script>
+const doa = [
+{
+  arabic: "بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ",
+  latin: "Bismillāhir rahmānir rahīm",
+  terjemahan: "Dengan nama Allah yang maha pengasih, lagi maha penyayang."
+},
+{
+  arabic: "اللّٰهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ وَعَلَى أٰلِهِ وَصَحْبِهِ وَسَلَّمَ، بِسْمِ اللهِ النُّوْرِ نُوْرٌ عَلَى نُوْرٍ، الحَمْدُ لِلهِ الَّذِيْ خَلَقَ النُّوْرَ، وَأَنْزَلَ التَّوْرَاةَ عَلَى جَبَلِ الطُّوْرِ فِي كِتَابٍ مَسْطُوْرٍ. الحَمْدُ لِلهِ الَّذِيْ بِالغِنَاءِ مَذْكُوْرٌ، وَبِالعِزَّةِ وَالجَلَالِ مَشْهُوْرٌ، وَعَلَى السَّرَّاءِ وَالضَّرَّاءِ مَشْكُوْرٌ.",
+  latin: "Allāhumma shalli 'alā sayyidinā Muhammadin wa 'alā ālihī wa shahbihī wa sallam. Bismillāhin nūri nūrun 'alā nur. Alhamdu lillāhil ladzī khalaqan nūr, wa anzalat Taurāta 'alā jabalit Thūr fī kitābim masthūr. Alhamdu lillāhil ladzī bil ghinā'i madzkūr, wa bil 'izzati wal jalāli masyhūr, wa 'alās sarrā'i wad dharrā'i masykūr.",
+  terjemahan: "Ya Allah, limpahkanlah rahmat dan sejahtera(-Mu) atas junjungan kami Nabi Muhammad, keluarga, dan para sahabatnya. Dengan nama Allah zat bercahaya, cahaya di atas cahaya. Segala puji bagi Allah yang menciptakan nur, dan menurunkan Taurat di atas bukit Thur pada kitab yang tertulis. Segala puji bagi Allah yang dengan kaya-Nya disebut, dengan kemuliaan dan kebesaran-Nya terkenal, dan yang pada saat (manusia) senang dan sulit tetap disyukuri."
+},
+{
+  arabic: "الحَمْدُ لِلهِ الَّذِيْ خَلَقَ السَّمٰوَاتِ وَالأَرْضَ وَجَعَلَ الظُّلُمَاتِ وَالنُّوْرَ، ثُمَّ الَّذِيْنَ كَفَرُوْا بِرَبِّهِمْ يَعْدِلُوْنَ، كٓهٰيٰعٓصٓ، حٰمٓ عٓسٓقٓ، إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِيْنُ، يَا حَيُّ يَا قَيُّوْمُ يَا ذَا الجَلَالِ وَالإِكْرَامِ، اللهُ لَطِيْفٌ بِعِبَادِهِ يَرْزُقُ مَنْ يَشَاءُ وَهُوَ القَوِيُّ العَزِيْزُ، يَا كَافِيَ كُلِّ شَيْئٍ، وَاصْرِفْ عَنِّي كُلَّ شَيْئٍ، بِيَدِكَ الخَيْرُ، إِنَّكَ عَلَى كُلِّ شَيْئٍ قَدِيْرٌ.",
+  latin: "Alhamdu lillāhil ladzī khalaqas samāwāti wal ardha, wa ja'alaz zhulumāti wan nūr, tsummal ladzīna kafarū bi rabbihim ya'dilūn, kāf hā yā 'aīn shād, hā mīm, 'aīn sīn qāf, iyyāka na'budu wa iyyāka nasta'īn, yā Hayyu ya Qayyūm, yā Dzal jalāli wal ikrām, Allāhu lathīfum bi 'ibādih, yarzuqu man yasyā'u wa huwal qawiyyul azīz, yā Kafiya kulli syaī', washrif 'annā kulla syaī', bi yadikal khair, innaka 'alā kulli syai'in qadīr.",
+  terjemahan: "Segala puji bagi Allah yang menciptakan langit dan bumi; dan menjadikan gelap dan nur, tetapi kemudian orang kafir kepada Tuhan mereka berpaling. Kāf, Hā, Yā, 'Aīn, Shād; Hā, Mīm; 'Aīn, Sīn, Qāf, kepada-Mu kami menyembah; dan hanya kepada-Mu memohon pertolongan; wahai Zat yang hidup, wahai Zat yang tegak berdiri. Allah bersikap lembut kepada hamba-Nya dan memberi rezeki kepada siapa saja yang Dia kehendaki. Dia maha kuat dan perkasa. Wahai Zat yang mencukupi segala sesuatu, palingkanlah segala sesuatu (mudharat) dari kami. Di tangan-Mu kebaikan itu. Sungguh, Engkau maha kuasa atas segala sesuatu."
+},
+{
+  arabic: "اللّٰهُمَّ يَا كَثِيْرَ النَّوَالِ، وَيَا دَائِمَ الوِصَالِ، وَيَا حُسْنَ الفِعَالِ، وَيَا رَازِقَ العِبَادِ عَلَى كُلِّ حَالٍ، وَيَا بَدِيْعًا بِلَا مِثَالٍ، وَيَا بَاقِي بِلَا زَوَالٍ، نَجِّنَا مِنَ الكُفْرِ وَالضَّلَالِ، بِحَقِّ لَا إِلٰهَ إِلَّا اللهُ مُحَمَّدٌ رَسُوْلُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ.",
+  latin: "Allāhumma yā Katsīran nawāl, wa yā Dā'imal wishāl, wa yā Husnal fi'āl, wa yā Rāziqal 'ibādi 'alā kulli hāl, wa yā Badī'an bi lā mitsāl, wa yā Bāqī bi lā zawāl, najjinā minal kufri wad dhalāl, bi haqqi lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.",
+  terjemahan: "Ya Allah, wahai Zat yang banyak anugerah, wahai Zat yang selalu terhubung, wahai Zat yang baik perbuatan, wahai Zat yang memberikan rezeki hamba-Nya pada setiap kondisi, wahai Zat yang mencipta pertama tanpa contoh, wahai Zat yang kekal tanpa sirna, selamatkan kami dari kekafiran dan kesesatan dengan hakikat 'Lā ilāha illallāh, Muhammadur Rasūlullah shallallāhu 'alayhi wa sallam.'"
+},
+{
+  arabic: "اللّٰهُمَّ إِنْ دَخَلَ الشَّكُّ فِي إِيْمَانِي بِكَ وَلَمْ أَعْلَمْ بِهِ أَوْعَلِمْتُ تُبْتُ عَنْهُ وَأَسْلَمْتُ وَأَقُوْلُ لَا إِلٰهَ إِلَّا اللهُ مُحَمَّدٌ رَسُوْلُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ",
+  latin: "Allāhumma in dakhalas syakku fī īmānī bika wa lam a'lam bihī aw 'alimtu tubtu 'anhu wa aslamtu wa aqūlu lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.",
+  terjemahan: "Ya Allah, jika keraguan hinggap pada keimananku kepada-Mu, baik tidak kusadari maupun kusadari, aku bertobat, menyerah, dan berkata, 'Lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.'"
+},
+{
+  arabic: "اللّٰهُمَّ إِنْ دَخَلَ الكُفْرُ فِي إِسْلَامِي بِكَ وَلَمْ أَعْلَمْ بِهِ أَوْعَلِمْتُ تُبْتُ عَنْهُ وَأَسْلَمْتُ وَأَقُوْلُ لَا إِلٰهَ إِلَّا اللهُ مُحَمَّدٌ رَسُوْلُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ",
+  latin: "Allāhumma in dakhalal kufru fī islāmī bika wa lam a'lam bihī aw 'alimtu tubtu 'anhu wa aslamtu wa aqūlu lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.",
+  terjemahan: "Ya Allah, jika kekufuran hinggap pada keislamanku kepada-Mu, baik tidak kusadari maupun kusadari, aku bertobat, menyerah, dan berkata, 'Lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.'"
+},
+{
+  arabic: "اللّٰهُمَّ إِنْ دَخَلَ الشَّكُّ فِي تَوْحِيْدِيْ إِيَّاكَ وَلَمْ أَعْلَمْ بِهِ أَوْعَلِمْتُ تُبْتُ عَنْهُ وَأَسْلَمْتُ وَأَقُوْلُ لَا إِلٰهَ إِلَّا اللهُ مُحَمَّدٌ رَسُوْلُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ",
+  latin: "Allāhumma in dakhalas syakku fī tawhīdī iyyāka wa lam a'lam bihī aw 'alimtu tubtu 'anhu wa aslamtu wa aqūlu lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.",
+  terjemahan: "Ya Allah, jika keraguan hinggap pada ketauhidanku kepada-Mu, baik tidak kusadari maupun kusadari, aku bertobat, menyerah, dan berkata, 'Lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.'"
+},
+{
+  arabic: "اللّٰهُمَّ إِنْ دَخَلَ العُجْبُ وَالكِبْرُ وَالرِّيَاءُ وَالسُّمْعَةُ وَالنُّقْصَانُ فِي عَمَلِي لَكَ وَلَمْ أَعْلَمْ بِهِ أَوْعَلِمْتُ تُبْتُ عَنْهُ وَأَسْلَمْتُ وَأَقُوْلُ لَا إِلٰهَ إِلَّا اللهُ مُحَمَّدٌ رَسُوْلُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ",
+  latin: "Allāhumma in dakhalal 'ujbu wal kibru war riyā'u was sum'atu wan nuqshānu fī 'amalī laka wa lam a'lam bihī aw 'alimtu tubtu 'anhu wa aslamtu wa aqūlu lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.",
+  terjemahan: "Ya Allah, jika ujub, sombong, riya, sum'ah, dan kekurangan masuk mencemari ibadahku kepada-Mu, baik tidak kusadari maupun kusadari, aku bertobat, menyerah, dan berkata, 'Lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.'"
+},
+{
+  arabic: "اللّٰهُمَّ إِنْ جَرَى الكِذْبُ وَالغِيْبَةُ وَالنَّمِيْمَةُ وَالبُهْتَانُ عَلَى لِسَانِي وَلَمْ أَعْلَمْ بِهِ أَوْعَلِمْتُ تُبْتُ عَنْهُ وَأَسْلَمْتُ وَأَقُوْلُ لَا إِلٰهَ إِلَّا اللهُ مُحَمَّدٌ رَسُوْلُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ",
+  latin: "Allāhumma in jaral kidzbu wal ghibatu wan namīmatu wal buhtānu 'alā lisānī wa lam a'lam bihī aw 'alimtu tubtu 'anhu wa aslamtu wa aqūlu lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.",
+  terjemahan: "Ya Allah, jika dusta, ghibah, namimah, dan bohong besar terucap dari mulutku, baik tidak kusadari maupun kusadari, aku bertobat, menyerah, dan berkata, 'Lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.'"
+},
+{
+  arabic: "اللّٰهُمَّ إِنْ دَخَلَ الخَطْرَةُ وَالوَسْوَسَةُ فِي صَدْرِي وَلَمْ أَعْلَمْ بِهِ أَوْعَلِمْتُ تُبْتُ عَنْهُ وَأَسْلَمْتُ وَأَقُوْلُ لَا إِلٰهَ إِلَّا اللهُ مُحَمَّدٌ رَسُوْلُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ",
+  latin: "Allāhumma in dakhalal khathratu wal was-wasatu fī shadrī wa lam a'lam bihī aw 'alimtu tubtu 'anhu wa aslamtu wa aqūlu lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.",
+  terjemahan: "Ya Allah, jika suatu pikiran (konyol) dan was-was melintas di dalam dadaku, baik tidak kusadari maupun kusadari, aku bertobat, menyerah, dan berkata, 'Lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.'"
+},
+{
+  arabic: "اللّٰهُمَّ إِنْ دَخَلَ التَّشْبِيْهُ وَالتَّقْصِيْرُ فِي مَعْرِفَتِي إِيَّاكَ وَلَمْ أَعْلَمْ بِهِ أَوْعَلِمْتُ تُبْتُ عَنْهُ وَأَسْلَمْتُ وَأَقُوْلُ لَا إِلٰهَ إِلَّا اللهُ مُحَمَّدٌ رَسُوْلُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ",
+  latin: "Allāhumma in dakhalat tasybīhu wat taqshīru fī ma'rifatī iyyāka wa lam a'lam bihī aw 'alimtu tubtu 'anhu wa aslamtu wa aqūlu lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.",
+  terjemahan: "Ya Allah, jika penyerupaan (makhluk) dan kelalaian ada pada makrifatku terhadap-Mu, baik tidak kusadari maupun kusadari, aku bertobat, menyerah, dan berkata, 'Lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.'"
+},
+{
+  arabic: "اللّٰهُمَّ إِنْ دَخَلَ النِّفَاقُ فِي قَلْبِي مِنَ الذُّنُوْبِ الكَبَائِرِ وَالصَّغَائِرِ كُلِّهَا وَلَمْ أَعْلَمْ بِهِ أَوْعَلِمْتُ تُبْتُ عَنْهُ وَأَسْلَمْتُ وَأَقُوْلُ لَا إِلٰهَ إِلَّا اللهُ مُحَمَّدٌ رَسُوْلُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ",
+  latin: "Allāhumma in dakhalan nifāqu fī qalbī minad dzunūbil kabā'iri was shaghā'iri kullihā wa lam a'lam bihī aw 'alimtu tubtu 'anhu wa aslamtu wa aqūlu lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.",
+  terjemahan: "Ya Allah, jika kemunafikan merayap di hatiku karena dosa baik dosa besar maupun dosa kecil semuanya, baik tidak kusadari maupun kusadari, aku bertobat, menyerah, dan berkata, 'Lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.'"
+},
+{
+  arabic: "اللّٰهُمَّ إِنْ دَخَلَ الرِّيَاءُ فِي أَعْمَالِي وَأَقْوَالِي وَلَمْ أَعْلَمْ بِهِ أَوْعَلِمْتُ تُبْتُ عَنْهُ وَأَسْلَمْتُ وَأَقُوْلُ لَا إِلٰهَ إِلَّا اللهُ مُحَمَّدٌ رَسُوْلُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ",
+  latin: "Allāhumma in dakhalar riyā'u a'mālī wa aqwālī wa lam a'lam bihī aw 'alimtu tubtu 'anhu wa aslamtu wa aqūlu lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.",
+  terjemahan: "Ya Allah, jika riya menyusup pada amal dan perkataanku, baik tidak kusadari maupun kusadari, aku bertobat, menyerah, dan berkata, 'Lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.'"
+},
+{
+  arabic: "اللّٰهُمَّ مَا عَمِلْتُ مِنْ سُوْءٍ وَلَمْ أَعْلَمْ بِهِ أَوْعَلِمْتُ تُبْتُ عَنْهُ وَأَسْلَمْتُ وَأَقُوْلُ لَا إِلٰهَ إِلَّا اللهُ مُحَمَّدٌ رَسُوْلُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ",
+  latin: "Allāhumma mā 'amiltu min sū'in wa lam a'lam bihī aw 'alimtu tubtu 'anhu wa aslamtu wa aqūlu lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.",
+  terjemahan: "Ya Allah, kejahatan yang kuperbuat, baik tidak kusadari maupun kusadari, aku bertobat, menyerah, dan berkata, 'Lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.'"
+},
+{
+  arabic: "اللّٰهُمَّ مَا أَرَدْتَ لِي مِنْ خَيْرٍ فَلَمْ أَشْكُرْهُ وَلَمْ أَعْلَمْ بِهِ أَوْعَلِمْتُ تُبْتُ عَنْهُ وَأَسْلَمْتُ وَأَقُوْلُ لَا إِلٰهَ إِلَّا اللهُ مُحَمَّدٌ رَسُوْلُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ",
+  latin: "Allāhumma mā aradta lī min khairin fa lam asykurhu wa lam a'lam bihī aw 'alimtu tubtu 'anhu wa aslamtu wa aqūlu lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.",
+  terjemahan: "Ya Allah, kebaikan yang Kaukehendaki untukku tetapi aku tidak mensyukurinya, baik tidak kusadari maupun kusadari, aku bertobat, menyerah, dan berkata, 'Lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.'"
+},
+{
+  arabic: "اللّٰهُمَّ مَا قَدَّرْتَ عَلَيَّ مِنْ أَمْرٍ فَلَمْ أَرْضَهُ وَلَمْ أَعْلَمْ بِهِ أَوْعَلِمْتُ تُبْتُ عَنْهُ وَأَسْلَمْتُ وَأَقُوْلُ لَا إِلٰهَ إِلَّا اللهُ مُحَمَّدٌ رَسُوْلُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ",
+  latin: "Allāhumma mā qaddarta 'alayya min amrin fa lam ardhahū wa lam a'lam bihī aw 'alimtu tubtu 'anhu wa aslamtu wa aqūlu lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.",
+  terjemahan: "Ya Allah, sesuatu yang Kautakdirkan padaku, tetapi aku tidak meridhainya, baik tidak kusadari maupun kusadari, aku bertobat, menyerah, dan berkata, 'Lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.'"
+},
+{
+  arabic: "اللّٰهُمَّ مَا أَنْعَمْتَ عَلَيَّ مِنْ نِعْمَةٍ فَعَصَيْتُكَ فِيْهِ وَلَمْ أَعْلَمْ بِهِ أَوْعَلِمْتُ تُبْتُ عَنْهُ وَأَسْلَمْتُ وَأَقُوْلُ لَا إِلٰهَ إِلَّا اللهُ مُحَمَّدٌ رَسُوْلُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ",
+  latin: "Allāhumma mā an'amta 'alayya min ni'matin fa 'ashaytuka fīh wa lam a'lam bihī aw 'alimtu tubtu 'anhu wa aslamtu wa aqūlu lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.",
+  terjemahan: "Ya Allah, sebuah nikmat yang Kauberikan padaku, lalu aku mendurhakai-Mu dengannya, baik tidak kusadari maupun kusadari, aku bertobat, menyerah, dan berkata, 'Lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.'"
+},
+{
+  arabic: "اللّٰهُمَّ مَا أَوْلَيْتَنِي مِنْ نَعْمَائِكَ فَغَفَلْتُ عَنْ شُكْرِكَ وَلَمْ أَعْلَمْ بِهِ أَوْعَلِمْتُ تُبْتُ عَنْهُ وَأَسْلَمْتُ وَأَقُوْلُ لَا إِلٰهَ إِلَّا اللهُ مُحَمَّدٌ رَسُوْلُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ",
+  latin: "Allāhumma mā awlaytanī min na'mā'ika fa ghafaltu 'an syukrika wa lam a'lam bihī aw 'alimtu tubtu 'anhu wa aslamtu wa aqūlu lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.",
+  terjemahan: "Ya Allah, nikmat-nikmat yang Kauanugerahkan kepadaku, lalu aku lengah untuk bersyukur, baik tidak kusadari maupun kusadari, aku bertobat, menyerah, dan berkata, 'Lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.'"
+},
+{
+  arabic: "اللّٰهُمَّ مَا أَوْلَيْتَنِي مِنْ اٰلَائِكَ فَلَمْ أُؤَدِّ حَقَّهُ وَلَمْ أَعْلَمْ بِهِ أَوْعَلِمْتُ تُبْتُ عَنْهُ وَأَسْلَمْتُ وَأَقُوْلُ لَا إِلٰهَ إِلَّا اللهُ مُحَمَّدٌ رَسُوْلُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ",
+  latin: "Allāhumma mā awlaytanī min ālā'ika fa lam u'addi haqqahū wa lam a'lam bihī aw 'alimtu tubtu 'anhu wa aslamtu wa aqūlu lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.",
+  terjemahan: "Ya Allah, nikmat-nikmat yang Kauamanahkan kepadaku, tetapi tidak kutunaikan haknya, baik tidak kusadari maupun kusadari, aku bertobat, menyerah, dan berkata, 'Lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.'"
+},
+{
+  arabic: "اللّٰهُمَّ مَا مَنَنْتَ عَلَيَّ مِنَ الحُسْنَى فَلَمْ أَحْمَدْكَ وَلَمْ أَعْلَمْ بِهِ أَوْعَلِمْتُ تُبْتُ عَنْهُ وَأَسْلَمْتُ وَأَقُوْلُ لَا إِلٰهَ إِلَّا اللهُ مُحَمَّدٌ رَسُوْلُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ",
+  latin: "Allāhumma mā mananta 'alayya minal husnā fa lam ahmadka wa lam a'lam bihī aw 'alimtu tubtu 'anhu wa aslamtu wa aqūlu lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.",
+  terjemahan: "Ya Allah, kebaikan yang Kauanugerahkan kepadaku, tetapi aku tidak memuji-Mu, baik tidak kusadari maupun kusadari, aku bertobat, menyerah, dan berkata, 'Lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.'"
+},
+{
+  arabic: "اللّٰهُمَّ مَا أَحْبَبْتَ لِي بِهِ عَلَيَّ مِنَ النَّظَرِ فِيْكَ فَغَمَضْتُ عَنْهُ وَلَمْ أَعْلَمْ بِهِ أَوْعَلِمْتُ تُبْتُ عَنْهُ وَأَسْلَمْتُ وَأَقُوْلُ لَا إِلٰهَ إِلَّا اللهُ مُحَمَّدٌ رَسُوْلُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ",
+  latin: "Allāhumma mā ahbabta lī bihī 'alayya minan nazhari fīka fa ghamadhtu 'anhu wa lam a'lam bihī aw 'alimtu tubtu 'anhu wa aslamtu wa aqūlu lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.",
+  terjemahan: "Ya Allah, renungan atas kebesaran kuasa-Mu yang Kauinginkan dariku, tetapi aku membutakan mata hatiku darinya, baik tidak kusadari maupun kusadari, aku bertobat, menyerah, dan berkata, 'Lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.'"
+},
+{
+  arabic: "اللّٰهُمَّ مَا صَنَعْتُ فِي عُمْرِي بِمَا لَمْ تَرْضَ وَلَمْ أَعْلَمْ بِهِ أَوْعَلِمْتُ تُبْتُ عَنْهُ وَأَسْلَمْتُ وَأَقُوْلُ لَا إِلٰهَ إِلَّا اللهُ مُحَمَّدٌ رَسُوْلُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ",
+  latin: "Allāhumma mā shana'tu fī 'umrī bi mā lam tardha wa lam a'lam bihī aw 'alimtu tubtu 'anhu wa aslamtu wa aqūlu lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.",
+  terjemahan: "Ya Allah, apa yang kuperbuat sepanjang usiaku dengan hal yang tidak Kauridhai, baik tidak kusadari maupun kusadari, aku bertobat, menyerah, dan berkata, 'Lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.'"
+},
+{
+  arabic: "اللّٰهُمَّ مَا قَصَرْتُ مِنْ عَمَلِي فِي رَجَائِكَ وَلَمْ أَعْلَمْ بِهِ أَوْعَلِمْتُ تُبْتُ عَنْهُ وَأَسْلَمْتُ وَأَقُوْلُ لَا إِلٰهَ إِلَّا اللهُ مُحَمَّدٌ رَسُوْلُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ",
+  latin: "Allāhumma mā qashartu min 'amalī fī rajā'ika wa lam a'lam bihī aw 'alimtu tubtu 'anhu wa aslamtu wa aqūlu lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.",
+  terjemahan: "Ya Allah, amalku yang terbatas di tengah panjangnya harapanku kepada-Mu, baik tidak kusadari maupun kusadari, aku bertobat, menyerah, dan berkata, 'Lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.'"
+},
+{
+  arabic: "اللّٰهُمَّ إِنِ اعْتَمَدْتُ عَلَى أَحَدٍ سِوَاكَ فِي الشَّدَائِدِ وَلَمْ أَعْلَمْ بِهِ أَوْعَلِمْتُ تُبْتُ عَنْهُ وَأَسْلَمْتُ وَأَقُوْلُ لَا إِلٰهَ إِلَّا اللهُ مُحَمَّدٌ رَسُوْلُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ",
+  latin: "Allāhumma ini'tamadtu 'alā ahadin siwāka fis syadā'idi wa lam a'lam bihī aw 'alimtu tubtu 'anhu wa aslamtu wa aqūlu lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.",
+  terjemahan: "Ya Allah, jika aku bersandar pada selain-Mu pada banyak kesulitan, baik tidak kusadari maupun kusadari, aku bertobat, menyerah, dan berkata, 'Lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.'"
+},
+{
+  arabic: "اللّٰهُمَّ إِنِ اسْتَعَنْتُ غَيْرَكَ فِي النَّوَائِبِ وَلَمْ أَعْلَمْ بِهِ أَوْعَلِمْتُ تُبْتُ عَنْهُ وَأَسْلَمْتُ وَأَقُوْلُ لَا إِلٰهَ إِلَّا اللهُ مُحَمَّدٌ رَسُوْلُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ",
+  latin: "Allāhumma inista'antu ghayraka fin nawā'ibi wa lam a'lam bihī aw 'alimtu tubtu 'anhu wa aslamtu wa aqūlu lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.",
+  terjemahan: "Ya Allah, jika aku memohon pertolongan kepada selain-Mu di tengah bencana-bencana, baik tidak kusadari maupun kusadari, aku bertobat, menyerah, dan berkata, 'Lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.'"
+},
+{
+  arabic: "اللّٰهُمَّ مَا أَصْلَحَ فِي شَأْنِي بِفَضْلِكَ وَرَأَيْتُهُ مِنْ غَيْرِكَ وَلَمْ أَعْلَمْ بِهِ أَوْعَلِمْتُ تُبْتُ عَنْهُ وَأَسْلَمْتُ وَأَقُوْلُ لَا إِلٰهَ إِلَّا اللهُ مُحَمَّدٌ رَسُوْلُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ",
+  latin: "Allāhumma mā ashlaha fī sya'nī bi fadhlika wa ra'aytuhū min ghayrika wa lam a'lam bihī aw 'alimtu tubtu 'anhu wa aslamtu wa aqūlu lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.",
+  terjemahan: "Ya Allah, urusanku yang maslahat berkat kemurahan-Mu, tetapi aku melihat sebabnya dari selain-Mu, baik tidak kusadari maupun kusadari, aku bertobat, menyerah, dan berkata, 'Lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.'"
+},
+{
+  arabic: "اللّٰهُمَّ إِنْ زَلَّتْ قَدَمِي عَنِ الصِّرَاطِ بِالسُّؤَالِ مِنْ غَيْرِكَ فَثَبِّتْنِي وَلَمْ أَعْلَمْ بِهِ أَوْعَلِمْتُ تُبْتُ عَنْهُ وَأَسْلَمْتُ وَأَقُوْلُ لَا إِلٰهَ إِلَّا اللهُ مُحَمَّدٌ رَسُوْلُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ",
+  latin: "Allāhumma in zallat qadamī 'anis shirāth bis su'āli min ghayrika fa tsabbitnī wa lam a'lam bihī aw 'alimtu tubtu 'anhu wa aslamtu wa aqūlu lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.",
+  terjemahan: "Ya Allah, jika kakiku tergelincir dari sirath karena pernah meminta kepada selain-Mu, maka tetapkanlah kakiku, baik tidak kusadari maupun kusadari, aku bertobat, menyerah, dan berkata, 'Lā ilāha illallāhu Muhammadur rasūlullah shallallāhu 'alaihi wa sallam.'"
+},
+{
+  arabic: "اللّٰهُمَّ يَا حَيُّ يَا قَيُّوْمُ، يَا حَنَّانُ يَا مَنَّانُ، يَا دَيَّانُ يَا سُلْطَانُ، يَا لَا إِلٰهَ إِلَّا أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِيْنَ. فَاسْتَجَبْنَا لَهُ وَنَجَّيْنٰهُ مِنَ الغَمِّ، وَكَذٰلِكَ نُنْجِي المُؤْمِنِيْنَ، وَزَكَرِيَّا إِذْ نَادَى رَبَّهُ رَبِّ لَا تَذَرْنِي فَرْدًا وَأَنْتَ خَيْرُ الوَارِثِيْنَ.",
+  latin: "Allāhumma yā Hayyu yā Qayyūm, yā Hannānu ya Mannān, yā Dayyānu yā Sulthān, yā lā ilāha illa anta, subhānaka innī kuntu minaz zhālimīn. Fastajabnā lahū wa najjaynāhu minal ghammi, wa kadzālika nunjil mu'minīn, wa Zakariyyā idz nādā rabbahū, 'Rabbi lā tadzarnī fardā, wa anta khayrul wāritsīn.'",
+  terjemahan: "Ya Allah, wahai Zat yang hidup, wahai Zat yang tegak berdiri, wahai Zat yang menurunkan rahmat, wahai Zat yang memberi anugerah, wahai Zat yang kuasa, wahai Zat penguasa, wahai Zat yang tiada tuhan kecuali Engkau. Maha suci Engkau. Sungguh, aku telah menzalimi diri sendiri. (firman Allah) 'Lalu Kami mengabulkan dan menyelamatkannya dari kesulitan. Demikian Kami menyelamatkan orang-orang beriman.' Zakariya AS ketika menyeru Tuhannya, 'Ya Tuhanku, janganlah Kau membiarkanku sendiri. Engkau sebaik-baik pewaris.'"
+},
+{
+  arabic: "اللّٰهُمَّ بِحَقِّ لَا إلٰهَ إِلَّا اللهُ وَبِعِزَّتِهِ، وَبِحَقِّ الكُرْسِي وَسَعَتِهِ، وَبِحَقِّ العَرْشِ وَعَظَمَتِهِ، وَبِحَقِّ القَلَمِ وَجَرَيَانِهِ، وَبِحَقِّ اللَّوْحِ وَحَفَظَتِهِ، وَبِحَقِّ المِيْزَانِ وَكَفَّتَيْهِ، وَبِحَقِّ الصِّرَاطِ وَدِقَّتِهِ، وَبِحَقِّ جِبْرِيْلَ وَأَمَانَتِهِ، وَبِحَقِّ مِيْكَائِيْلَ وَشَفَقَتِهِ، وَبِحَقِّ إِسْرَافِيْلَ وَنَفْخَتِهِ، وَبِحَقِّ عِزْرَائِيْلَ وَقَبْضَتِهِ، وَبِحَقِّ رِضْوَانَ وَجَنَّتِهِ، وَبِحَقِّ مَالِكٍ وَجَهَنَّمِهِ، وَبِحَقِّ أٰدَمَ وَصَفْوَتِهِ، وَبِحَقِّ شِيْثٍ وَنُبُوَّتِهِ، وَبِحَقِّ نُوْحٍ وَسَفِيْنَتِهِ، وَبِحَقِّ إِبْرَاهِيْمَ وَخُلَّتِهِ، وَبِحَقِّ إِسْحَاقَ وَدِيَانَتِهِ، وَبِحَقِّ إِسْمَاعِيْلَ وَذَبِيْحَتِهِ، وَبِحَقِّ يَعْقُوْبَ وَحَسْرَتِهِ، وَبِحَقِّ يُوْسُفَ وَغُرْبَتِهِ وَبِحَقِّ مُوْسَى وَأٰيَاتِهِ وَبِحَقِّ هَارُوْنَ وَحُرْمَتِهِ وَبِحَقِّ هُوْدٍ وَهَيْبَتِهِ، وَبِحَقِّ صَالِحٍ وَنَاقَتِهِ، وَبِحَقِّ لُوْطٍ وَعِبْرَتِهِ/وَجِيْرَتِهِ، وَبِحَقِّ يُوْنُسَ وَدَعْوَتِهِ، وَبِحَقِّ دَانِيَالَ وَكَرَامَتِهِ، وَبِحَقِّ زَكَرِيَّا وَطَهَارَتِهِ، وَبِحَقِّ عِيْسَى وَرُوْحَانِيَّتِهِ، وَبِحَقِّ مُحَمَّدٍ المُصْطَفَى صَلَّى اللهُ عَلَيْهِ وَسَلَّمِ وَشَفَاعَتِهِ.",
+  latin: "Allāhumma bi haqqi lā ilāha illallāhu wa bi 'izzatih, wa bi haqqil kursiyyi wa sa'atih, wa bi haqqil 'arsyi wa 'azhamatih, wa bi haqqil qalami wa jarayānih, wa bi haqqil lawhi wa hafazhatih, wa bi haqqil mīzāni wa kaffatayh, wa bi haqqis shirāthi wa diqqatih, wa bi haqqi Jibrīla wa amānatih, wa bi haqqi Mīkā'īla wa syafaqatih, wa bi haqqi Isrāfīla wa nafkhatih, wa bi haqqi 'Izrā'īla wa qabdhatih, wa bi haqqi Ridhwāna wa jannatih, wa bi haqqi Mālikin wa jahannamih, wa bi haqqi Ādama wa shafwatih, wa bi haqqi Syitsin wa nubuwwatih, wa bi haqqi Nūhin wa safīnatih, wa bi haqqi Ibrāhīma wa khullatih, wa bi haqqi Ishāqa wa diyānatih, wa bi haqqi Ismā'īla wa dzabīhatih, wa bi haqqi Ya'qūba wa hasratih, wa bi haqqi Yūsufa wa ghurbatih, wa bi haqqi Mūsā wa āyātih, wa bi haqqi Hārūna wa hurmatih, wa bi haqqi Hūdin wa haybatih, wa bi haqqi Shālihin wa nāqatih, wa bi haqqi Lūthin wa 'ibratih / wa jīratih, wa bi haqqi Yūnusa wa da'watih, wa bi haqqi Dāniyāla wa karāmatih, wa bi haqqi Zakariyyā wa thahāratih, wa bi haqqi 'Īsā wa rūhāniyyatih, wa bi haqqi Muhammadinil Mushthafā shallallāhu 'alayhi wa sallam wa syafā'atih.",
+  terjemahan: "Ya Allah, dengan hak 'Lā ilāha illallāh' dan kemuliaannya, hak kursi dan keluasannya, hak Arasy dan kebesarannya, hak kalam dan jalan goresannya, hak Lauh Mahfuzh dan malaikat penjaganya, hak mizan dan dua piring timbangannya, hak sirath dan kehalusannya, hak Jibril dan kejujurannya, hak Mikail dan belas kasihnya, hak Israfil dan tiupan sangkakalanya, hak Izrail dan pencabutan nyawanya, hak Ridhwan dan surganya, hak Malik dan nerakanya, hak Adam dan keterpilihannya, hak Syits dan kenabiannya, hak Nuh dan kapalnya, hak Ibrahim dan derajat khalilullahnya, hak Ishak dan agamanya, hak Isma'il dan penyembelihannya, hak Ya'kub dan deritanya, hak Yusuf dan pengasingannya, hak Musa dan ayat-ayatnya, hak Harun dan kehormatannya, hak Hud dan kewibawaannya, hak Saleh dan untanya, hak Luth, pelajarannya/tetangganya, hak Yunus dan dakwahnya, hak Danial dan kemuliaannya, hak Zakariya dan kesuciannya, hak Isa dan kerohaniannya, dan hak Muhammad SAW sebagai nabi pilihan dan syafaatnya."
+},
+{
+  arabic: "اللهُمَّ يَا حَيُّ، يَا قَيُّوْمُ، يَا لَا إِلٰهَ إِلَّا أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِيْنَ. فَاسْتَجَبْنَا لَهُ وَنَجَّيْنٰهُ مِنَ الغَمِّ، وَكَذٰلِكَ نُنْجِي المُؤْمِنِيْنَ. لَا إِلٰهَ إِلَّا هُوَ، عَلَيْهِ تَوَكَّلْتُ، وَهُوَ رَبُّ العَرْشِ العَظِيْمِ. حَسْبِيَ اللهُ وَنِعْمَ الوَكِيْلُ، نِعْمَ المَوْلَى وَنِعْمَ النَّصِيْرُ، لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللهِ العَلِيِّ العَظِيْمِ.",
+  latin: "Allāhumma yā Hayyu yā Qayyūm, yā lā ilāha illa anta, subhānaka innī kuntu minaz zhālimīn. Fastajabnā lahū wa najjaynāhu minal ghammi, wa kadzālika nunjil mu'minīn. Lā ilāha illā hū, 'alayhi tawakkaltu, wa huwa Rabbul 'Arsyil 'Azhīm. Hasbiyallāhu wa ni'mal wakīl, ni'mal maulā wa ni'man nashīr, lā hawla wa lā quwwata illā billāhil 'Aliyyil 'Azhīm.",
+  terjemahan: "Ya Allah, wahai Zat yang hidup, wahai Zat yang tegak berdiri, wahai Zat yang tiada tuhan kecuali Engkau. Maha suci Engkau. Sungguh, aku telah menzalimi diri sendiri. (firman Allah) 'Lalu Kami mengabulkan dan menyelamatkannya dari kesulitan. Demikian Kami menyelamatkan orang-orang beriman.' Tiada tuhan selain Dia. Hanya kepada-Nya aku berserah. Dialah Tuhan Arasy yang agung. Cukuplah Allah bagiku, Dialah sebaik-baik wakil, sebaik-baik pelindung, dan sebaik-baik penolong. Tiada daya dan kekuatan kecuali berkat Allah Yang Maha Tinggi lagi Maha Agung."
+},
+{
+  arabic: "رَبَّنَا أٰتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الأٰخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ، وَصَلَّى اللهُ عَلَى خَيْرِ خَلْقِهِ، وَنُوْرِ عَرْشِهِ، سَيِّدِنَا وَنَبِيِّنَا وَشَفِيْعِنَا مُحَمَّدٍ، وَعَلَى أٰلِهِ وَأَصْحَابِهِ أَجْمَعِيْنَ، بِرَحْمَتِكَ يَا أَرْحَمَ الرَّاحِمِيْنَ، اٰمِيْنَ، اٰمِيْنَ، يَا رَبَّ العَالَمِيْنَ.",
+  latin: "Rabbanā ātinā fid dunyā hasanah, wa fil ākhirati hasanah, wa qinā 'adzāban nār, wa shallallāhu 'alā khayri khalqihī wa nūri 'arsyih, sayyidinā wa nabiyyinā wa syafī'inā Muhammadin, wa 'alā ālihī wa ashhābihī ajma'īn, bi rahmatika yā arhamar rāhimīn, āmīn, āmīn, yā Rabbal 'Ālamīn.",
+  terjemahan: "Wahai Tuhan kami, berikanlah kami kebaikan di dunia dan kebaikan di akhirat. Lindungilah kami dari siksa neraka. Semoga Allah melimpahkan shalat dan salam-Nya untuk makhluk terbaik-Nya dan cahaya arasy-Nya, yaitu junjungan kita, nabi kita, pemberi syafaat bagi kita, Nabi Muhammad SAW, keluarga, dan seluruh sahabatnya, berkat rahmat-Mu wahai Zat yang maha pengasih. Amiiin, amiiin, kabulkanlah wahai Tuhan semesta alam."
+},
+{
+  arabic: "لَا إِلٰهَ إِلَّا اللهُ حَوَالَيْنَا حِصَارًا، مُحَمَّدٌ رَسُوْلُ اللهِ قُفْلًا وَمِسْمَارًا. لَا إِلٰهَ إِلَّا اللهُ، مُحَمَّدٌ رَسُوْلُ اللهِ. لَا إِلٰهَ إِلَّا اللهُ مُحَمَّدٌ رَسُوْلُ اللهِ، قَوْلًا وَفِعْلًا. إِنَّ بَطْشَ رَبِّكَ لَشَدِيْدٌ، وَاللهُ مِنْ وَرَائِهِمْ مُحِيْطٌ، بَلْ هُوَ قُرْآنٌ مَجِيْدٌ فِيْ لَوْحٍ مَحْفُوْظٍ. صُمٌّ بُكْمٌ عُمْيٌ فَهُمْ لَا يَرْجِعُوْنَ، صُمٌّ بُكْمٌ عُمْيٌ فَهُمْ لَا يَعْقِلُوْنَ، صُمٌّ بُكْمٌ عُمْيٌ فَهُمْ لَا يَتَكَلَّمُوْنَ، صُمٌّ بُكْمٌ عُمْيٌ فَهُمْ لَا يُبْصِرُوْنَ، وَصَلَّى اللهُ عَلَى خَيْرِ خَلْقِهِ مُحَمَّدٍ وَعَلَى آلِهِ وَأَوْضَحَ بِهِ أَجْمَعِيْنَ.",
+  latin: "Lā ilāha illallāhu hawwalainā hishāran, Muhammadur rasūlullāhi quflan wa mismāran. Lā ilāha illallāh, Muhammadur rasūlullāh. Lā ilāha illallāhu Muhammadur rasūlullāh, qawlan wa fi'lan. Inna bathsya rabbika lasyadīd, wallāhu min warā'ihim muhīth, bal huwa qur'ānum majīdun fī lawhim mahfūzh. Shummum bukmun 'umyun fahum lā yarji'ūn, shummum bukmun 'umyun fahum lā ya'qilūn, shummum bukmun 'umyun fahum lā yatakallamūn, shummum bukmun 'umyun fahum lā yubshirūn, wa shallallāhu 'alā khayri khalqihī Muhammadin wa 'alā ālihī wa awdhaha bihī ajma'īn.",
+  terjemahan: "Tiada tuhan selain Allah menjadi benteng di sekeliling kami, Muhammad utusan Allah menjadi gembok dan pasaknya. Tiada tuhan selain Allah, Muhammad utusan Allah. Tiada tuhan selain Allah, Muhammad utusan Allah, dalam ucapan dan perbuatan. Sesungguhnya siksaan Tuhanmu benar-benar keras, dan Allah dari belakang mereka meliputi (mereka). Bahkan itu adalah Al-Qur'an yang mulia, (tersimpan) dalam Lauh Mahfuzh. Tuli, bisu, dan buta, maka mereka tidak akan kembali (kepada kebenaran); tuli, bisu, dan buta, maka mereka tidak mengerti; tuli, bisu, dan buta, maka mereka tidak bisa berbicara; tuli, bisu, dan buta, maka mereka tidak bisa melihat. Semoga Allah melimpahkan shalawat kepada sebaik-baik makhluk-Nya, Nabi Muhammad, dan kepada keluarganya, serta menerangi (jalan) dengannya bagi mereka semua."
+}
+];
+
+const container = document.getElementById('segments');
+const dotsWrap = document.getElementById('dots');
+const jumpSelect = document.getElementById('jumpSelect');
+const pageNumEl = document.getElementById('pageNum');
+const pageTotalEl = document.getElementById('pageTotal');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+
+let currentPage = 0;
+const total = doa.length;
+
+pageTotalEl.textContent = total;
+
+// isi dropdown lompat halaman
+doa.forEach((item, idx) => {
+  const opt = document.createElement('option');
+  opt.value = idx;
+  opt.textContent = `Bacaan ${idx + 1}`;
+  jumpSelect.appendChild(opt);
+});
+
+// isi titik navigasi
+doa.forEach((item, idx) => {
+  const dot = document.createElement('span');
+  dot.onclick = () => goPage(idx);
+  dotsWrap.appendChild(dot);
+});
+
+function renderPage(idx){
+  const item = doa[idx];
+  container.innerHTML = `
+    <div class="segment">
+      <div class="no">Bacaan ${idx + 1}</div>
+      <p class="arabic">${item.arabic}</p>
+      <button class="toggle-btn" onclick="toggleDetail(this)">
+        <span class="arrow">▾</span> Latin &amp; Terjemahan
+      </button>
+      <div class="details">
+        <div class="details-inner">
+          <p class="latin"><span class="label">Latin</span>${item.latin}</p>
+          <p class="terjemahan"><span class="label">Terjemahan</span>${item.terjemahan}</p>
+        </div>
+      </div>
+    </div>
+  `;
+  pageNumEl.textContent = idx + 1;
+  jumpSelect.value = idx;
+  prevBtn.disabled = idx === 0;
+  nextBtn.disabled = idx === total - 1;
+  [...dotsWrap.children].forEach((d, i) => d.classList.toggle('active', i === idx));
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function goPage(idx){
+  if(idx < 0 || idx >= total) return;
+  currentPage = idx;
+  renderPage(currentPage);
+}
+
+function toggleDetail(btn){
+  const details = btn.nextElementSibling;
+  const isOpen = details.classList.toggle('open');
+  btn.classList.toggle('open', isOpen);
+}
+
+// navigasi keyboard (panah kiri/kanan)
+document.addEventListener('keydown', (e) => {
+  if(e.key === 'ArrowRight') goPage(currentPage + 1);
+  if(e.key === 'ArrowLeft') goPage(currentPage - 1);
+});
+
+renderPage(currentPage);
+</script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("service-worker.js");
+  });
+}
+</script>
+</body>
+</html>
