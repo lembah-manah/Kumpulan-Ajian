@@ -1,244 +1,339 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="jv">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arsip Pergolakan Jawa — Kajian Sejarah Demak · Pajang · Mataram</title>
+<title>Wirid & Aji - Naskah Pribadi</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#141109">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper: #EFE8D6;
-    --paper-deep: #E4DABF;
-    --ink: #241E17;
-    --ink-soft: #4A4038;
-    --indigo: #1E3640;
-    --indigo-deep: #142530;
-    --teak: #7C4A30;
-    --brass: #B4903F;
-    --brass-light: #D8B96A;
-    --rust: #8E3D2E;
-    --line: rgba(36,30,23,0.16);
+    --bg-0:#141109;
+    --bg-1:#1c1810;
+    --line:#3c331f;
+    --ink:#c8bb8e;
+    --ink-dim:#948667;
+    --ink-bright:#ded0a0;
+    --gold:#a8935e;
   }
+
   *{box-sizing:border-box;}
-  body{
+
+  html,body{
     margin:0;
-    background:var(--paper);
+    padding:0;
+    background:var(--bg-0);
     color:var(--ink);
-    font-family:"Source Serif 4", Georgia, serif;
-    line-height:1.65;
   }
-  a{ color:inherit; text-decoration:none; }
-  h1,h2,h3{ font-family:"Fraunces", Georgia, serif; color:var(--indigo-deep); margin:0; line-height:1.15; }
+
+  body{
+    font-family:'EB Garamond', serif;
+    line-height:1.75;
+    font-size:19px;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(168,147,94,0.10), transparent 60%),
+      radial-gradient(ellipse 700px 600px at 90% 100%, rgba(168,147,94,0.05), transparent 55%),
+      var(--bg-0);
+    min-height:100vh;
+  }
 
   body::before{
     content:"";
-    position:fixed; inset:0; pointer-events:none; z-index:0;
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:0.05;
+    mix-blend-mode:overlay;
     background-image:
-      radial-gradient(circle at 15% 25%, rgba(0,0,0,0.02) 0, transparent 40%),
-      radial-gradient(circle at 85% 75%, rgba(0,0,0,0.02) 0, transparent 40%);
+      repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.4) 3px),
+      repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0,0,0,0.4) 3px);
+    background-size:3px 3px;
   }
 
-  .hero{
+  .wrap{
+    max-width:720px;
+    margin:0 auto;
+    padding:6rem 1.75rem 7rem;
     position:relative;
-    background: linear-gradient(180deg, var(--indigo) 0%, var(--indigo-deep) 100%);
-    color:#F3EEDF;
-    padding: 5rem 1.5rem 4rem;
+  }
+
+  header.hero{
     text-align:center;
-    overflow:hidden;
-  }
-  .hero .motif{
-    position:absolute; inset:0; opacity:0.15;
-    background-repeat: repeat-x; background-size: 340px auto; background-position:bottom center;
-  }
-  .hero-inner{ position:relative; max-width:760px; margin:0 auto; }
-  .kicker{
-    font-family:"Inter", sans-serif; font-size:0.78rem; letter-spacing:0.14em;
-    color:var(--brass-light); font-weight:500; margin-bottom:1.3rem;
-  }
-  .hero h1{ font-size:clamp(2.1rem, 6vw, 3.3rem); font-weight:600; color:#FBF7EA; }
-  .hero h1 em{ font-style:italic; font-weight:500; color:var(--brass-light); }
-  .hero p{ font-size:1.08rem; color:#CBD3CE; max-width:560px; margin:1.3rem auto 0; }
-  .wave-divider{ display:block; width:100%; height:34px; fill:var(--paper); }
-
-  main{ max-width:920px; margin:0 auto; padding: 3.4rem 1.5rem 2rem; position:relative; z-index:1; }
-  .lede{
-    font-size:1.08rem; color:var(--ink-soft); text-align:center;
-    max-width:620px; margin:0 auto 3rem;
+    margin-bottom:4.5rem;
   }
 
-  .grid{
-    display:grid; grid-template-columns:1fr; gap:1.1rem;
+  .eyebrow{
+    letter-spacing:0.42em;
+    text-transform:uppercase;
+    font-size:0.72rem;
+    color:var(--ink-dim);
+    margin:0 0 1.4rem;
   }
-  @media(min-width:640px){ .grid{ grid-template-columns: 1fr 1fr; } }
 
-  .card{
-    position:relative;
-    display:block;
-    background: var(--paper-deep);
-    border:1px solid var(--line);
-    border-left: 5px solid var(--teak);
-    padding: 1.5rem 1.5rem 1.4rem;
-    border-radius: 2px;
-    transition: transform .15s ease, box-shadow .15s ease, border-left-color .15s ease;
+  .eyebrow::before,
+  .eyebrow::after{
+    content:"—";
+    color:var(--gold);
+    margin:0 0.6em;
+    opacity:0.6;
   }
-  .card:hover{
-    transform: translateY(-2px);
-    box-shadow: 0 10px 24px rgba(20,37,48,0.14);
-    border-left-color: var(--rust);
-  }
-  .card.disabled{
-    cursor:default;
-    opacity:0.72;
-  }
-  .card.disabled:hover{ transform:none; box-shadow:none; border-left-color:var(--teak); }
 
-  .card .num{
-    font-family:"Inter", sans-serif; font-size:0.74rem; letter-spacing:0.1em;
-    color:var(--brass); font-weight:600; display:block; margin-bottom:0.5rem;
-  }
-  .card h2{ font-size:1.34rem; font-weight:600; }
-  .card .epithet{
-    font-family:"Fraunces", serif; font-style:italic; font-weight:500;
-    font-size:0.94rem; color:var(--rust); margin-top:0.15rem;
-  }
-  .card p.teaser{
-    font-size:0.92rem; color:var(--ink-soft); margin: 0.8rem 0 0;
-  }
-  .card .status{
-    display:inline-block; margin-top:1rem;
-    font-family:"Inter", sans-serif; font-size:0.72rem; letter-spacing:0.06em;
+  h1{
+    font-family:'Cormorant Garamond', serif;
     font-weight:600;
+    letter-spacing:0.07em;
+    text-transform:uppercase;
+    font-size:clamp(2.1rem, 6vw, 3.2rem);
+    color:var(--ink-bright);
+    margin:0;
+    text-shadow:0 0 34px rgba(168,147,94,0.28);
   }
-  .card .status.live{ color:var(--indigo-deep); }
-  .card .status.live::before{ content:"● "; color: var(--rust); }
-  .card .status.soon{ color: var(--ink-soft); }
-  .card .status.soon::before{ content:"○ "; }
 
-  .ornament{
-    display:flex; align-items:center; justify-content:center; gap:0.7rem;
-    margin: 3rem 0; color: var(--brass);
+  .subtitle{
+    margin:1.1rem 0 0;
+    font-style:italic;
+    color:var(--ink-dim);
+    font-size:1rem;
+    letter-spacing:0.02em;
   }
-  .ornament::before, .ornament::after{ content:""; height:1px; width:60px; background:var(--line); }
 
-  .synthesis{
-    position:relative; display:block; text-decoration:none;
-    background: linear-gradient(135deg, #201A2E 0%, #130F1C 100%);
-    border-radius: 4px; padding: 2rem 1.8rem; overflow:hidden;
-    transition: transform .15s ease, box-shadow .15s ease;
+  .glyph-divider{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:0.9rem;
+    margin:2.6rem auto 0;
+    width:min(340px, 70%);
   }
-  .synthesis:hover{ transform: translateY(-2px); box-shadow: 0 12px 28px rgba(20,15,28,0.25); }
-  .synthesis .kicker2{
-    font-family:"Inter", sans-serif; font-size:0.72rem; letter-spacing:0.12em;
-    color: #DDBD6F; font-weight:600; margin-bottom:0.6rem;
+  .glyph-divider .rule{
+    flex:1;
+    height:1px;
+    background:linear-gradient(90deg, transparent, var(--line) 40%, var(--line) 60%, transparent);
   }
-  .synthesis h2{ font-family:"Fraunces", serif; font-style:italic; font-weight:500; font-size:1.5rem; color:#F7F2E5; margin:0; }
-  .synthesis h2 b{ font-style:normal; font-weight:700; color:#DDBD6F; }
-  .synthesis p{ font-family:"Source Serif 4", serif; font-size:0.95rem; color:#CFC7B4; margin:0.7rem 0 0; max-width:520px; }
-  .synthesis .arrow{
-    font-family:"Inter", sans-serif; font-size:0.78rem; font-weight:600; color: #DDBD6F;
-    margin-top:1.1rem; display:inline-block;
+  .glyph-divider .mark{
+    width:7px;height:7px;
+    border:1px solid var(--gold);
+    transform:rotate(45deg);
+    opacity:0.75;
+  }
+
+  section.kategori{
+    margin-bottom:3.4rem;
+  }
+
+  .kategori-head{
+    display:flex;
+    align-items:baseline;
+    gap:0.85rem;
+    border-bottom:1px solid var(--line);
+    padding-bottom:0.6rem;
+    margin-bottom:1.2rem;
+  }
+
+  .kategori-label{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    font-size:1.4rem;
+    color:var(--ink-bright);
+    letter-spacing:0.04em;
+  }
+
+  .naskah-list{
+    list-style:none;
+    margin:0;
+    padding:0;
+  }
+
+  .naskah-list li{
+    margin-bottom:0.6rem;
+  }
+
+  .naskah-link{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:1rem;
+    padding:1rem 1.1rem;
+    border:1px solid var(--line);
+    color:var(--ink);
+    text-decoration:none;
+    transition:all 0.2s ease;
+  }
+
+  .naskah-link:hover{
+    border-color:var(--gold);
+    background:rgba(168,147,94,0.06);
+  }
+
+  .naskah-link .judul{
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.15rem;
+    letter-spacing:0.02em;
+    color:var(--ink-bright);
+  }
+
+  .naskah-link .keterangan{
+    font-style:italic;
+    font-size:0.85rem;
+    color:var(--ink-dim);
+  }
+
+  .naskah-link .arrow{
+    color:var(--gold);
+    flex-shrink:0;
   }
 
   footer{
-    text-align:center; padding: 2.5rem 1.5rem 4rem;
-    font-family:"Inter", sans-serif; font-size:0.78rem; color:var(--ink-soft);
+    text-align:center;
+    margin-top:5rem;
+    color:var(--ink-dim);
+    font-style:italic;
+    font-size:0.85rem;
+    letter-spacing:0.03em;
+    opacity:0.7;
   }
-  footer .sig{ color:var(--brass); font-family:"Fraunces", serif; font-style:italic; font-size:1rem; margin-bottom:0.4rem; }
+
+  .install-note{
+    margin-top:3rem;
+    padding:1rem 1.2rem;
+    border:1px dashed var(--line);
+    font-size:0.85rem;
+    color:var(--ink-dim);
+    text-align:center;
+    font-style:italic;
+  }
+
+  @media (max-width:520px){
+    .wrap{ padding:4rem 1.25rem 5rem; }
+    body{ font-size:17.5px; }
+    .naskah-link{ flex-direction:column; align-items:flex-start; gap:0.3rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ scroll-behavior:auto !important; }
+  }
 </style>
 </head>
 <body>
+  <div class="wrap">
 
-<header class="hero">
-  <svg class="motif" viewBox="0 0 340 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-    <path d="M0 40 Q 42 10 85 40 T 170 40 T 255 40 T 340 40 V60 H0 Z" fill="#B4903F"/>
-  </svg>
-  <div class="hero-inner">
-    <div class="kicker">ARSIP KAJIAN HISTORIOGRAFI</div>
-    <h1>Tujuh Tokoh, <em>Satu Zaman</em></h1>
-    <p>Pergolakan pesisir dan pedalaman Jawa abad ke-16—dari runtuhnya Demak, berdirinya Pajang, hingga fajar Mataram Islam—dibaca ulang lewat sumber babad, silsilah, dan kronik asing.</p>
+    <header class="hero">
+      <p class="eyebrow">Naskah &middot; Transkrip</p>
+      <h1>Wirid &amp; Aji</h1>
+      <p class="subtitle">Kumpulan wirid dan aji, ditranskrip dari naskah asli</p>
+      <div class="glyph-divider"><span class="rule"></span><span class="mark"></span><span class="rule"></span></div>
+    </header>
+
+    <section class="kategori">
+      <div class="kategori-head">
+        <span class="kategori-label">Malaikatan</span>
+      </div>
+      <ul class="naskah-list">
+        <li>
+          <a class="naskah-link" href="malaikatan-1-2.html">
+            <span>
+              <span class="judul">Malaikatan 1 dan 2</span><br>
+              <span class="keterangan">Sele Tangi Pumo Ono Gawe</span>
+            </span>
+            <span class="arrow">&rarr;</span>
+          </a>
+        </li>
+        <li>
+          <a class="naskah-link" href="malaikatan-3.html">
+            <span>
+              <span class="judul">Malaikatan 3</span><br>
+              <span class="keterangan">Syahadat</span>
+            </span>
+            <span class="arrow">&rarr;</span>
+          </a>
+        </li>
+        <li>
+          <a class="naskah-link" href="malaikatan-4.html">
+            <span>
+              <span class="judul">Malaikatan 4</span><br>
+              <span class="keterangan">Syahadat Pangleburan &amp; Syahadat Pengasihan</span>
+            </span>
+            <span class="arrow">&rarr;</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="kategori">
+      <div class="kategori-head">
+        <span class="kategori-label">Aji</span>
+      </div>
+      <ul class="naskah-list">
+        <li>
+          <a class="naskah-link" href="arjuno-lulut.html">
+            <span>
+              <span class="judul">Arjuno Lulut</span>
+            </span>
+            <span class="arrow">&rarr;</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="kategori">
+      <div class="kategori-head">
+        <span class="kategori-label">Hijib</span>
+      </div>
+      <ul class="naskah-list">
+        <li>
+          <a class="naskah-link" href="hijib-barqi.html">
+            <span>
+              <span class="judul">Hijib Barqi</span>
+            </span>
+            <span class="arrow">&rarr;</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="kategori">
+      <div class="kategori-head">
+        <span class="kategori-label">Manik Moyo</span>
+      </div>
+      <ul class="naskah-list">
+        <li>
+          <a class="naskah-link" href="dhohir-manusia.html">
+            <span>
+              <span class="judul">Dhohir Manusia</span><br>
+              <span class="keterangan">Nur Muhammad</span>
+            </span>
+            <span class="arrow">&rarr;</span>
+          </a>
+        </li>
+        <li>
+          <a class="naskah-link" href="manik-moyo.html">
+            <span>
+              <span class="judul">Manik Moyo</span><br>
+              <span class="keterangan">Jauhar Awal / Jauhar Manik</span>
+            </span>
+            <span class="arrow">&rarr;</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <p class="install-note">Situs ini dapat dipasang ke layar utama dan dibuka tanpa koneksi internet setelah dibuka sekali.</p>
+
+    <footer>Ditranskrip dari naskah asli</footer>
   </div>
-  <svg class="wave-divider" viewBox="0 0 1440 40" preserveAspectRatio="none"><path d="M0 40 Q 360 0 720 40 T 1440 40 V40 H0 Z"/></svg>
-</header>
 
-<main>
-  <p class="lede">Ketujuh kajian kini lengkap. Pilih satu tokoh untuk membuka kajian komparatifnya — masing-masing menelusuri babad Jawa, silsilah lokal, dan sumber asing yang sezaman, lalu membandingkan versi-versi yang kerap berselisih.</p>
-
-  <div class="grid">
-
-    <a class="card" href="ratu-kalinyamat.html">
-      <span class="num">01</span>
-      <h2>Ratu Kalinyamat</h2>
-      <div class="epithet">Rainha de Japara, senhora poderosa e rica</div>
-      <p class="teaser">Putri Sultan Trenggana yang membangun Jepara menjadi kekuatan maritim terbesar di pesisir utara Jawa dan dua kali memimpin ekspedisi melawan Portugis di Malaka.</p>
-      <span class="status live">Kajian tersedia</span>
-    </a>
-
-    <a class="card" href="panembahan-senopati.html">
-      <span class="num">02</span>
-      <h2>Panembahan Senopati</h2>
-      <div class="epithet">Pendiri Mataram Islam</div>
-      <p class="teaser">Putra Ki Ageng Pemanahan yang mengubah hadiah tanah alas Mentaok menjadi cikal-bakal dinasti yang kelak menguasai Jawa.</p>
-      <span class="status live">Kajian tersedia</span>
-    </a>
-
-    <a class="card" href="arya-penangsang.html">
-      <span class="num">03</span>
-      <h2>Arya Penangsang</h2>
-      <div class="epithet">Adipati Jipang, penuntut takhta Demak</div>
-      <p class="teaser">Murid kesayangan Sunan Kudus yang menuntut balas atas kematian ayahnya, memicu perang saudara yang mengakhiri kejayaan Demak.</p>
-      <span class="status live">Kajian tersedia</span>
-    </a>
-
-    <a class="card" href="joko-tingkir.html">
-      <span class="num">04</span>
-      <h2>Joko Tingkir</h2>
-      <div class="epithet">Sultan Hadiwijaya, pendiri Pajang</div>
-      <p class="teaser">Menantu Sultan Trenggana yang pengangkatannya sebagai penguasa Pajang menandai pergeseran pusat kekuasaan Jawa dari pesisir ke pedalaman.</p>
-      <span class="status live">Kajian tersedia</span>
-    </a>
-
-    <a class="card" href="sunan-kalijaga.html">
-      <span class="num">05</span>
-      <h2>Sunan Kalijaga</h2>
-      <div class="epithet">Wali penyebar Islam lewat budaya Jawa</div>
-      <p class="teaser">Anggota Wali Songo yang berdakwah melalui wayang dan tembang, sekaligus penasihat spiritual lintas generasi penguasa Demak-Pajang-Mataram.</p>
-      <span class="status live">Kajian tersedia</span>
-    </a>
-
-    <a class="card" href="raden-rangga.html">
-      <span class="num">06</span>
-      <h2>R. Rangga</h2>
-      <div class="epithet">Putra sulung Panembahan Senopati</div>
-      <p class="teaser">Pangeran bertenaga raksasa dalam tradisi lisan Mataram, dikenal lewat kisah-kisah kesaktian yang menautkan legenda dan catatan istana.</p>
-      <span class="status live">Kajian tersedia</span>
-    </a>
-
-    <a class="card" href="ki-ageng-mangir.html">
-      <span class="num">07</span>
-      <h2>Ki Ageng Mangir Wonoboyo</h2>
-      <div class="epithet">Penguasa Mangir, penentang Mataram</div>
-      <p class="teaser">Tokoh pedikan yang menolak tunduk pada Mataram, ditaklukkan lewat siasat pernikahan dengan Rara Pembayun—kisah yang berakhir tragis di Kotagede.</p>
-      <span class="status live">Kajian tersedia</span>
-    </a>
-
-  </div>
-
-  <div class="ornament">✦</div>
-
-  <a class="synthesis" href="sintesis.html">
-    <div class="kicker2">ARTIKEL PENUTUP · KAJIAN SINTESIS</div>
-    <h2>Satu Abad, <b>Tujuh Simpul</b></h2>
-    <p>Ketujuh tokoh di atas bukan tujuh riwayat yang kebetulan sezaman — melainkan satu jaringan sebab-akibat yang berkesinambungan. Kajian penutup ini memetakan relasi, kronologi terpadu, dan pola historiografis yang menautkan seluruhnya.</p>
-    <span class="arrow">Baca kajian sintesis →</span>
-  </a>
-</main>
-
-<footer>
-  <div class="sig">Trus Karya Tataning Bumi</div>
-  Arsip kajian historiografi komparatif · disusun 2026
-</footer>
-
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("service-worker.js").catch(() => {});
+    });
+  }
+</script>
 </body>
 </html>
